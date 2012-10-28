@@ -50,117 +50,117 @@ public class Board {
 		
 		// Check for a winner
 		switch (checkAllRows()) {
-		case BLACK:
+		case MAX:
 			return 1;
-		case RED:
+		case MIN:
 			return 2;
 		default:
 			break;
 		}
 		
 		switch (checkAllColumns()) {
-		case BLACK:
+		case MAX:
 			return 1;
-		case RED:
+		case MIN:
 			return 2;
 		default:
 			break;
 		}
 		
 		switch (checkAllLRDiagonals()) {
-		case BLACK:
+		case MAX:
 			return 1;
-		case RED:
+		case MIN:
 			return 2;
 		default:
 			break;
 		}
 		
 		switch (checkAllRLDiagonals()) {
-		case BLACK:
+		case MAX:
 			return 1;
-		case RED:
+		case MIN:
 			return 2;
 		default:
 			break;
 		}
 		
 		// Check if the game board is full, in that case there is a draw
-		int numCheckers = 0;
+		int numMoves = 0;
 		for (int i = 0; i < width; i++)
-			numCheckers += columns[i].numCheckers;
-		if (numCheckers == width * height)
+			numMoves += columns[i].numPieces;
+		if (numMoves == width * height)
 			return 0;
 		
 		return -1;
 	}
 
-	protected Checker checkAllRows() {
-		Checker retVal = Checker.EMPTY;
+	protected Minimax checkAllRows() {
+		Minimax retVal = Minimax.EMPTY;
 
 		// Check all rows
 		for (int i = 0; i < height; i++) {
 			retVal = checkHorizontal(i);
-			if (retVal != Checker.EMPTY)
+			if (retVal != Minimax.EMPTY)
 				return retVal;
 		}
 		return retVal;
 	}
 
-	protected Checker checkAllColumns() {
-		Checker retVal = Checker.EMPTY;
+	protected Minimax checkAllColumns() {
+		Minimax retVal = Minimax.EMPTY;
 
 		// Check all columns
 		for (int i = 0; i < width; i++) {
 			retVal = checkVertical(i);
-			if (retVal != Checker.EMPTY)
+			if (retVal != Minimax.EMPTY)
 				return retVal;
 		}
 		return retVal;
 	}
 
-	protected Checker checkAllLRDiagonals() {
-		Checker retVal = Checker.EMPTY;
+	protected Minimax checkAllLRDiagonals() {
+		Minimax retVal = Minimax.EMPTY;
 
 		// Check top-left to bottom-right diagonals
 		for (int i = 1; i < height; i++) {
 			retVal = checkLRDiagonal(i, 0);
-			if (retVal != Checker.EMPTY)
+			if (retVal != Minimax.EMPTY)
 				return retVal;
 		}
 		for (int i = 1; i < width; i++) {
 			retVal = checkLRDiagonal(height - 1, i);
-			if (retVal != Checker.EMPTY)
+			if (retVal != Minimax.EMPTY)
 				return retVal;
 		}
 		return retVal;
 	}
 
-	protected Checker checkAllRLDiagonals() {
-		Checker retVal = Checker.EMPTY;
+	protected Minimax checkAllRLDiagonals() {
+		Minimax retVal = Minimax.EMPTY;
 
 		// Check top-right to bottom-left diagonals
 		for (int i = 1; i < width; i++) {
 			retVal = checkRLDiagonal(height - 1, i);
-			if (retVal != Checker.EMPTY)
+			if (retVal != Minimax.EMPTY)
 				return retVal;
 		}
 		for (int i = 1; i < height; i++) {
 			retVal = checkRLDiagonal(i, width - 1);
-			if (retVal != Checker.EMPTY)
+			if (retVal != Minimax.EMPTY)
 				return retVal;
 		}
 		return retVal;
 	}
 
-	protected Checker checkRLDiagonal(int row, int col) {
+	protected Minimax checkRLDiagonal(int row, int col) {
 		int numInARow = 0;
-		Checker lastColor = Checker.EMPTY;
+		Minimax lastColor = Minimax.EMPTY;
 
 		while ((row >= 0) && (col >= 0)) {
-			Checker currChecker = columns[col].getChecker(row);
+			Minimax currChecker = columns[col].getPiece(row);
 
-			if (currChecker == Checker.EMPTY) {
+			if (currChecker == Minimax.EMPTY) {
 				lastColor = currChecker;
 				numInARow = 0;
 			}
@@ -177,17 +177,17 @@ public class Board {
 			col--;
 		}
 
-		return Checker.EMPTY;
+		return Minimax.EMPTY;
 	}
 
-	protected Checker checkLRDiagonal(int row, int col) {
+	protected Minimax checkLRDiagonal(int row, int col) {
 		int numInARow = 0;
-		Checker lastColor = Checker.EMPTY;
+		Minimax lastColor = Minimax.EMPTY;
 
 		while ((row >= 0) && (col < width)) {
-			Checker currChecker = columns[col].getChecker(row);
+			Minimax currChecker = columns[col].getPiece(row);
 
-			if (currChecker == Checker.EMPTY) {
+			if (currChecker == Minimax.EMPTY) {
 				lastColor = currChecker;
 				numInARow = 0;
 			}
@@ -203,17 +203,17 @@ public class Board {
 			row--;
 			col++;
 		}
-		return Checker.EMPTY;
+		return Minimax.EMPTY;
 	}
 
-	protected Checker checkHorizontal(int row) {
+	protected Minimax checkHorizontal(int row) {
 		int numInARow = 0;
-		Checker lastColor = Checker.EMPTY;
+		Minimax lastColor = Minimax.EMPTY;
 
 		for (int i = 0; i < width; i++) {
-			Checker currChecker = columns[i].getChecker(row);
+			Minimax currChecker = columns[i].getPiece(row);
 
-			if (currChecker == Checker.EMPTY) {
+			if (currChecker == Minimax.EMPTY) {
 				lastColor = currChecker;
 				numInARow = 0;
 			}
@@ -227,16 +227,16 @@ public class Board {
 				numInARow = 1;
 			}
 		}
-		return Checker.EMPTY;
+		return Minimax.EMPTY;
 	}
 
-	protected Checker checkVertical(int col) {
+	protected Minimax checkVertical(int col) {
 		int numInARow = 0;
-		Checker lastColor = Checker.EMPTY;
+		Minimax lastColor = Minimax.EMPTY;
 		Column currColumn = columns[col];
 
-		for (int i = 0; i < currColumn.numCheckers; i++) {
-			Checker currChecker = currColumn.getChecker(i);
+		for (int i = 0; i < currColumn.numPieces; i++) {
+			Minimax currChecker = currColumn.getPiece(i);
 			if (currChecker == lastColor) {
 				if (++numInARow >= N) {
 					return lastColor;
@@ -247,12 +247,12 @@ public class Board {
 				numInARow = 1;
 			}
 		}
-		return Checker.EMPTY;
+		return Minimax.EMPTY;
 	}
 
-	public boolean dropChecker(Checker piece, int colNum) {
+	public boolean dropPiece(Minimax piece, int colNum) {
 		if (colNum < columns.length) {
-			return columns[colNum].dropChecker(piece);
+			return columns[colNum].dropPiece(piece);
 		}
 		else {
 			return false;
@@ -263,14 +263,14 @@ public class Board {
 		String retVal = "";
 		for (int i = height - 1; i >= 0; i--) {
 			for (int j = 0; j < width; j++) {
-				switch (columns[j].getChecker(i)) {
-				case BLACK:
+				switch (columns[j].getPiece(i)) {
+				case MAX:
 					retVal += "X";
 					break;
 				case EMPTY:
 					retVal += "-";
 					break;
-				case RED:
+				case MIN:
 					retVal += "O";
 					break;
 				}
