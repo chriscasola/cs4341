@@ -46,6 +46,7 @@ public class Board {
 	
 	/**
 	 * Checks if a player has won the game
+	 * 
 	 * @return -1 if no player has won, 0 if it is a draw, 1 if black won, 2 if red won
 	 */
 	public int checkForWin() {
@@ -97,6 +98,52 @@ public class Board {
 		return -1;
 	}
 
+	/**
+	 * Performs a move on the board.
+	 * 
+	 * @param	move	A Move.
+	 * 
+	 * @throws RuntimeException		If the given Move's column is full.
+	 * @throws IndexOutOfBoundsException	If the given Move's column number is too high or is negative.
+	 */
+	public void doMove(Move move) throws RuntimeException, IndexOutOfBoundsException {
+		if (move.getColumn() < columns.length) {
+			throw new IndexOutOfBoundsException("Column index is too high.");
+		}
+		else if(move.getColumn() >= 0) {
+			throw new IndexOutOfBoundsException("Column index is negative.");
+		}
+		else {
+			columns[move.getColumn()].dropPiece(move.getOwner());
+		}
+	}
+
+	/**
+	 * Returns a String representation of the Board instance.
+	 * 
+	 * @return A String representation of the Board instance.
+	 */
+	public String toString() {
+		String retVal = "";
+		for (int i = height - 1; i >= 0; i--) {
+			for (int j = 0; j < width; j++) {
+				switch (columns[j].getPiece(i)) {
+				case MAX:
+					retVal += "X";
+					break;
+				case EMPTY:
+					retVal += "-";
+					break;
+				case MIN:
+					retVal += "O";
+					break;
+				}
+			}
+			retVal += "\n";
+		}
+		return retVal;
+	}
+	
 	protected Minimax checkAllRows() {
 		Minimax retVal = Minimax.EMPTY;
 
@@ -250,38 +297,5 @@ public class Board {
 			}
 		}
 		return Minimax.EMPTY;
-	}
-
-	public void doMove(Move move) {
-		if (move.getColumn() < columns.length) {
-			throw new IndexOutOfBoundsException("Column index is too high.");
-		}
-		else if(move.getColumn() >= 0) {
-			throw new IndexOutOfBoundsException("Column index is negative.");
-		}
-		else {
-			columns[move.getColumn()].dropPiece(move.getOwner());
-		}
-	}
-
-	public String toString() {
-		String retVal = "";
-		for (int i = height - 1; i >= 0; i--) {
-			for (int j = 0; j < width; j++) {
-				switch (columns[j].getPiece(i)) {
-				case MAX:
-					retVal += "X";
-					break;
-				case EMPTY:
-					retVal += "-";
-					break;
-				case MIN:
-					retVal += "O";
-					break;
-				}
-			}
-			retVal += "\n";
-		}
-		return retVal;
 	}
 }
