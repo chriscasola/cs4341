@@ -8,41 +8,41 @@ package edu.wpi.cs.connectn.board;
  */
 public class Column {
 	
-	/** The height of the column (a.k.a. max number of checkers it can contain) */
+	/** The height of the column (a.k.a. max number of pieces it can contain) */
 	protected final int height;
 	
-	/** The number of checkers currently in this column */
-	protected int numCheckers;
+	/** The number of pieces currently in this column */
+	protected int numPieces;
 	
 	/** A list of slots in this column */
-	protected Checker[] slots;
+	protected Minimax[] slots;
 	
 	/**
 	 * Constructs a new Column with the specified height (available slots)
 	 * 
-	 * @param height the number of checkers that can fit in this column
+	 * @param height the number of pieces that can fit in this column
 	 */
 	public Column(int height) {
 		this.height = height;
-		this.numCheckers = 0;
-		this.slots = new Checker[height];
+		this.numPieces = 0;
+		this.slots = new Minimax[height];
 	
 		// Set all the slots to empty
 		for (int i = 0; i < height; i++) {
-			slots[i] = Checker.EMPTY;
+			slots[i] = Minimax.EMPTY;
 		}
 	}
 	
 	/**
-	 * Drops a new checker in this column. The new checker is placed in
+	 * Drops a new piece in this column. The new piece is placed in
 	 * the next available slot.
 	 * 
-	 * @param piece the piece to place (red or black)
+	 * @param piece the piece to place (MAX or MIN)
 	 * @return true if successful, false otherwise
 	 */
-	public boolean dropChecker(Checker piece) {
-		if ((numCheckers < height) && (piece != Checker.EMPTY)) {
-			slots[numCheckers++] = piece;
+	public boolean dropPiece(Minimax piece) {
+		if ((numPieces < height) && (piece != Minimax.EMPTY)) {
+			slots[numPieces++] = piece;
 			return true;
 		}
 		else {
@@ -51,11 +51,11 @@ public class Column {
 	}
 	
 	/**
-	 * Returns the checker at the given position
-	 * @param pos the position to retrieve a checker from
-	 * @return the checker at the given position
+	 * Returns the piece at the given position
+	 * @param pos the position to retrieve a piece from
+	 * @return the piece at the given position
 	 */
-	public Checker getChecker(int pos) {
+	public Minimax getPiece(int pos) {
 		if (pos < height) {
 			return slots[pos];
 		}

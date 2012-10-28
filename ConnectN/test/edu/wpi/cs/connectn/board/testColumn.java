@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.wpi.cs.connectn.board.Checker;
+import edu.wpi.cs.connectn.board.Minimax;
 import edu.wpi.cs.connectn.board.Column;
 
 public class testColumn {
@@ -27,23 +27,23 @@ public class testColumn {
 		assertEquals(5, col1.slots.length);
 		assertEquals(1, col2.slots.length);
 		assertEquals(30, col3.slots.length);
-		assertEquals(0, col1.numCheckers);
+		assertEquals(0, col1.numPieces);
 	}
 
 	@Test
-	public void testDropChecker() {
-		assertTrue(col1.dropChecker(Checker.RED));
-		assertEquals(1, col1.numCheckers);
-		assertTrue(col1.dropChecker(Checker.BLACK));
-		assertFalse(col1.dropChecker(Checker.EMPTY));
-		assertEquals(2, col1.numCheckers);
-		assertEquals(Checker.RED, col1.slots[0]);
-		assertEquals(Checker.BLACK, col1.slots[1]);
-		assertEquals(Checker.EMPTY, col1.slots[2]);
+	public void testdropPiece() {
+		assertTrue(col1.dropPiece(Minimax.MIN));
+		assertEquals(1, col1.numPieces);
+		assertTrue(col1.dropPiece(Minimax.MAX));
+		assertFalse(col1.dropPiece(Minimax.EMPTY));
+		assertEquals(2, col1.numPieces);
+		assertEquals(Minimax.MIN, col1.slots[0]);
+		assertEquals(Minimax.MAX, col1.slots[1]);
+		assertEquals(Minimax.EMPTY, col1.slots[2]);
 		
 		for (int i = 0; i < 3; i++)
-			assertTrue(col1.dropChecker(Checker.BLACK));
+			assertTrue(col1.dropPiece(Minimax.MAX));
 		
-		assertFalse(col1.dropChecker(Checker.RED));
+		assertFalse(col1.dropPiece(Minimax.MIN));
 	}
 }
