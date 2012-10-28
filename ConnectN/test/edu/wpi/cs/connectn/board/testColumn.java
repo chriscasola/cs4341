@@ -32,18 +32,44 @@ public class testColumn {
 
 	@Test
 	public void testdropPiece() {
-		assertTrue(col1.dropPiece(Minimax.MIN));
+		try {
+			col1.dropPiece(Minimax.MIN);
+		}
+		catch (Exception e) {
+			fail("Exception message: " + e.getMessage());
+		}
 		assertEquals(1, col1.numPieces);
-		assertTrue(col1.dropPiece(Minimax.MAX));
-		assertFalse(col1.dropPiece(Minimax.EMPTY));
+		try {
+			col1.dropPiece(Minimax.MAX);
+		}
+		catch (Exception e) {
+			fail("Exception message: " + e.getMessage());
+		}
+		try {
+			col1.dropPiece(Minimax.EMPTY);
+		}
+		catch (RuntimeException e) {
+			assertTrue("Column is already full.".equals(e.getMessage()));
+		}
 		assertEquals(2, col1.numPieces);
 		assertEquals(Minimax.MIN, col1.slots[0]);
 		assertEquals(Minimax.MAX, col1.slots[1]);
 		assertEquals(Minimax.EMPTY, col1.slots[2]);
 		
-		for (int i = 0; i < 3; i++)
-			assertTrue(col1.dropPiece(Minimax.MAX));
+		for (int i = 0; i < 3; i++) {
+			try {
+				col1.dropPiece(Minimax.MAX);
+			}
+			catch (Exception e) {
+				fail("Received exception when i = " + i + ". Exception message: " + e.getMessage());
+			}
+		}
 		
-		assertFalse(col1.dropPiece(Minimax.MIN));
+		try {
+			col1.dropPiece(Minimax.MIN);
+		}
+		catch (RuntimeException e) {
+			assertTrue("Column is already full.".equals(e.getMessage()));
+		}
 	}
 }
