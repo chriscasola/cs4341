@@ -6,8 +6,8 @@ import edu.wpi.cs.connectn.board.Minimax;
  * Represents a Move by storing the column in which the Move was made and the owner of the Move.
  */
 public class Move {
-	private int column;
-	private Minimax owner;
+	private final int column;
+	private final Minimax owner;
 	
 	/**
 	 * Constructor.
