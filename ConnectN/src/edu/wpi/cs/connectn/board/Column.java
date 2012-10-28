@@ -38,15 +38,14 @@ public class Column {
 	 * the next available slot.
 	 * 
 	 * @param piece the piece to place (MAX or MIN)
-	 * @return true if successful, false otherwise
+	 * @throws RuntimeException		if the column is already full
 	 */
-	public boolean dropPiece(Minimax piece) {
+	public void dropPiece(Minimax piece) {
 		if ((numPieces < height) && (piece != Minimax.EMPTY)) {
 			slots[numPieces++] = piece;
-			return true;
 		}
 		else {
-			return false; // the column is full
+			throw new RuntimeException("Column is already full.");
 		}
 	}
 	
@@ -60,7 +59,7 @@ public class Column {
 			return slots[pos];
 		}
 		else {
-			throw new RuntimeException("Column does not have that many slots");
+			throw new IndexOutOfBoundsException("Column does not have that many slots");
 		}
 	}
 }
