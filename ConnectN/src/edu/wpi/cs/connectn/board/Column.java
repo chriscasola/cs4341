@@ -40,7 +40,7 @@ public class Column {
 	 * @param piece the piece to place (MAX or MIN)
 	 * @throws RuntimeException		if the column is already full
 	 */
-	public void dropPiece(Minimax piece) {
+	public void dropPiece(Minimax piece) throws RuntimeException {
 		if ((numPieces < height) && (piece != Minimax.EMPTY)) {
 			slots[numPieces++] = piece;
 		}
