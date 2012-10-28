@@ -1,5 +1,7 @@
 package edu.wpi.cs.connectn.board;
 
+import edu.wpi.cs.connectn.tree.Move;
+
 /**
  * Represents a Connect-N game board
  * @author Chris
@@ -250,12 +252,15 @@ public class Board {
 		return Minimax.EMPTY;
 	}
 
-	public boolean dropPiece(Minimax piece, int colNum) {
-		if (colNum < columns.length) {
-			return columns[colNum].dropPiece(piece);
+	public void doMove(Move move) {
+		if (move.getColumn() < columns.length) {
+			throw new IndexOutOfBoundsException("Column index is too high.");
+		}
+		else if(move.getColumn() >= 0) {
+			throw new IndexOutOfBoundsException("Column index is negative.");
 		}
 		else {
-			return false;
+			columns[move.getColumn()].dropPiece(move.getOwner());
 		}
 	}
 
