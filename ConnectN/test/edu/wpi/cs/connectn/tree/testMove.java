@@ -1,8 +1,11 @@
-package edu.wpi.cs.connectn.board;
+package edu.wpi.cs.connectn.tree;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import edu.wpi.cs.connectn.tree.Move;
+import edu.wpi.cs.connectn.board.Minimax;
 
 public class testMove {
 	@Test

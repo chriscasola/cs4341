@@ -1,4 +1,6 @@
-package edu.wpi.cs.connectn.board;
+package edu.wpi.cs.connectn.tree;
+
+import edu.wpi.cs.connectn.board.Minimax;
 
 /**
  * Represents a Move by storing the column in which the Move was made and the owner of the Move.
