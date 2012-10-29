@@ -64,7 +64,16 @@ public class Node {
 	 * @param child the child to add to this node
 	 */
 	public void addChild(Node child) {
-		this.children.add(child.move.getColumn(), child);
+		this.children.add(child);
+	}
+	
+	public String toString() {
+		String retVal = "";
+		retVal += "Move: Column " + move.getColumn() + " Owner " + move.getOwner() + "; Depth: " + depth + "\n";
+		for (int i = 0; i < children.size(); i++) {
+			retVal += children.get(i).toString();
+		}
+		return retVal;
 	}
 	
 	/**

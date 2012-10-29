@@ -43,7 +43,9 @@ public class TreeWorker extends Thread {
 		Minimax childOwner = (currNode.getMove().getOwner() == Minimax.MAX) ? Minimax.MIN : Minimax.MAX;
 		jboard.doMove(currNode.getMove());
 		
-		switch (jboard.checkForWin()) {
+		GameState currState = jboard.checkForWin();
+		
+		switch (currState) {
 		case DRAW:
 			currNode.setUtility(utilityFunction.calcUtility(currNode, GameState.DRAW));
 			return currNode;
@@ -57,8 +59,8 @@ public class TreeWorker extends Thread {
 			for (int i = 0; i < jboard.getWidth(); i++) {
 				if (!jboard.getColumn(i).isFull()) {
 					Node newNode = new Node(new Move(i, childOwner), currNode, 0, currNode.getDepth() + 1);
-					jboard.revert(1);
 					currNode.addChild(buildTree(newNode));
+					jboard.revert();
 				}
 			}
 			return currNode;	

@@ -16,15 +16,23 @@ public class testTreeWorker {
 
 	@Before
 	public void setUp() throws Exception {
-		j1 = new JournaledBoard(5, 6, 3);		
-		n1 = new Node(new Move(3, Minimax.MAX), null, 0, 0);
+		j1 = new JournaledBoard(2, 2, 2);		
+		n1 = new Node(new Move(1, Minimax.MAX), null, 0, 0);
 		tw1 = new TreeWorker(n1, j1);
 	}
 
 	@Test
 	public void test() {
 		tw1.run();
-		assertTrue(true);
+		
+		String expected = "Move: Column 1 Owner MAX; Depth: 0\n"
+						+ "Move: Column 0 Owner MIN; Depth: 1\n"
+						+ "Move: Column 0 Owner MAX; Depth: 2\n"
+						+ "Move: Column 1 Owner MAX; Depth: 2\n"
+						+ "Move: Column 1 Owner MIN; Depth: 1\n"
+						+ "Move: Column 0 Owner MAX; Depth: 2\n";
+
+		assertTrue(expected.equals(n1.toString()));
 	}
 
 }
