@@ -21,10 +21,10 @@ public class testNode {
 	public void test() {
 		assertNull(n1.parent);
 		assertEquals(2, n1.move.getColumn());
-		assertEquals(0, n1.utility);
+		assertTrue(0f == n1.utility);
 		
 		assertEquals(n1, n2.parent);
-		assertEquals(5, n2.utility);
+		assertTrue(5f == n2.utility);
 		assertEquals(Minimax.MAX, n2.move.getOwner());
 	}
 

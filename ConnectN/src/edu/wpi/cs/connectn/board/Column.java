@@ -7,16 +7,16 @@ package edu.wpi.cs.connectn.board;
  *
  */
 public class Column {
-	
+
 	/** The height of the column (a.k.a. max number of pieces it can contain) */
 	protected final int height;
-	
+
 	/** The number of pieces currently in this column */
 	protected int numPieces;
-	
+
 	/** A list of slots in this column */
 	protected Minimax[] slots;
-	
+
 	/**
 	 * Constructs a new Column with the specified height (available slots)
 	 * 
@@ -26,13 +26,13 @@ public class Column {
 		this.height = height;
 		this.numPieces = 0;
 		this.slots = new Minimax[height];
-	
+
 		// Set all the slots to empty
 		for (int i = 0; i < height; i++) {
 			slots[i] = Minimax.EMPTY;
 		}
 	}
-	
+
 	/**
 	 * Drops a new piece in this column. The new piece is placed in
 	 * the next available slot.
@@ -48,7 +48,7 @@ public class Column {
 			throw new RuntimeException("Column is already full.");
 		}
 	}
-	
+
 	/**
 	 * Returns the piece at the given position
 	 * @param pos the position to retrieve a piece from
@@ -62,7 +62,7 @@ public class Column {
 			throw new IndexOutOfBoundsException("Column does not have that many slots");
 		}
 	}
-	
+
 	/**
 	 * Removes the top most piece from the column.
 	 * 
@@ -70,5 +70,15 @@ public class Column {
 	 */
 	protected void removePiece() {
 		slots[--numPieces] = Minimax.EMPTY;
+	}
+
+	
+	public boolean isFull() {
+		if (numPieces >= height) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

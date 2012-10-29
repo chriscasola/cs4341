@@ -300,4 +300,20 @@ public class Board {
 		}
 		return Minimax.EMPTY;
 	}
+
+	/**
+	 * @return the width of the board
+	 */
+	public int getWidth() {
+		return width;
+	}
+	
+	public Column getColumn(int colNum) {
+		if ((colNum < width) && (colNum >= 0)) {
+			return columns[colNum];
+		}
+		else {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+	}
 }

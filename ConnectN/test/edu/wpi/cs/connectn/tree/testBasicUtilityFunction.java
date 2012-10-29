@@ -11,20 +11,22 @@ import edu.wpi.cs.connectn.board.Minimax;
 public class testBasicUtilityFunction {
 	
 	Node n1;
+	UtilityFunction f1;
 	
 	@Before
 	public void setUp() throws Exception {
 		n1 = new Node(new Move(2, Minimax.MIN), null, 4, 48);
+		f1 = new BasicUtilityFunction();
 	}
 
 	@Test
 	public void test() {
-		assertTrue((1.0f / 48) == BasicUtilityFunction.calcUtility(n1, GameState.MAX));
-		assertTrue((-1.0f / 48) == BasicUtilityFunction.calcUtility(n1, GameState.MIN));
-		assertTrue(0f == BasicUtilityFunction.calcUtility(n1, GameState.DRAW));
+		assertTrue((1.0f / 48) == f1.calcUtility(n1, GameState.MAX));
+		assertTrue((-1.0f / 48) == f1.calcUtility(n1, GameState.MIN));
+		assertTrue(0f == f1.calcUtility(n1, GameState.DRAW));
 		
 		try {
-			BasicUtilityFunction.calcUtility(n1, GameState.IN_PROGRESS);
+			f1.calcUtility(n1, GameState.IN_PROGRESS);
 			fail();
 		}
 		catch (RuntimeException e) {
