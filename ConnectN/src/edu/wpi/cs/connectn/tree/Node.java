@@ -20,6 +20,17 @@ public class Node {
 	
 	/** The parent node of this node */
 	protected final Node parent;
+	
+	/** The depth of this node in the tree */
+	protected final int depth;
+	
+	public Node(Move move, Node parent, int utility, int depth) {
+		this.move = move;
+		this.parent = parent;
+		this.utility = utility;
+		this.children = new ArrayList<Node>();
+		this.depth = depth;
+	}
 
 	/**
 	 * Constructs a new Node with the given Move and parent Node
@@ -37,10 +48,7 @@ public class Node {
 	 * @param utility the utility of being at this node (or game state)
 	 */
 	public Node(Move move, Node parent, int utility) {
-		this.move = move;
-		this.parent = parent;
-		this.utility = utility;
-		this.children = new ArrayList<Node>();
+		this(move, parent, utility, 0);
 	}
 	
 	/**
@@ -95,5 +103,12 @@ public class Node {
 	 */
 	public Node getParent() {
 		return parent;
+	}
+	
+	/**
+	 * @return the depth
+	 */
+	public int getDepth() {
+		return depth;
 	}
 }

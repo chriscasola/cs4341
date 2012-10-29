@@ -47,43 +47,45 @@ public class Board {
 	/**
 	 * Checks if a player has won the game
 	 * 
-	 * @return -1 if no player has won, 0 if it is a draw, 1 if black won, 2 if red won
+	 * TODO Change check helpers so that they return GameState enums rather than Minimax enums
+	 * 
+	 * @return the state of the game
 	 */
-	public int checkForWin() {
+	public GameState checkForWin() {
 		
 		// Check for a winner
 		switch (checkAllRows()) {
 		case MAX:
-			return 1;
+			return GameState.MAX;
 		case MIN:
-			return 2;
+			return GameState.MIN;
 		default:
 			break;
 		}
 		
 		switch (checkAllColumns()) {
 		case MAX:
-			return 1;
+			return GameState.MAX;
 		case MIN:
-			return 2;
+			return GameState.MIN;
 		default:
 			break;
 		}
 		
 		switch (checkAllLRDiagonals()) {
 		case MAX:
-			return 1;
+			return GameState.MAX;
 		case MIN:
-			return 2;
+			return GameState.MIN;
 		default:
 			break;
 		}
 		
 		switch (checkAllRLDiagonals()) {
 		case MAX:
-			return 1;
+			return GameState.MAX;
 		case MIN:
-			return 2;
+			return GameState.MIN;
 		default:
 			break;
 		}
@@ -93,9 +95,9 @@ public class Board {
 		for (int i = 0; i < width; i++)
 			numMoves += columns[i].numPieces;
 		if (numMoves == width * height)
-			return 0;
+			return GameState.DRAW;
 		
-		return -1;
+		return GameState.IN_PROGRESS;
 	}
 
 	/**
