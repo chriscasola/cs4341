@@ -62,4 +62,13 @@ public class Column {
 			throw new IndexOutOfBoundsException("Column does not have that many slots");
 		}
 	}
+	
+	/**
+	 * Removes the top most piece from the column.
+	 * 
+	 * TODO check if empty first
+	 */
+	protected void removePiece() {
+		slots[--numPieces] = Minimax.EMPTY;
+	}
 }
