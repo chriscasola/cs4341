@@ -104,4 +104,11 @@ public class Node {
 	public Node getParent() {
 		return parent;
 	}
+	
+	/**
+	 * @return the depth
+	 */
+	public int getDepth() {
+		return depth;
+	}
 }
