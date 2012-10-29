@@ -1,6 +1,6 @@
 package edu.wpi.cs.connectn.board;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 import edu.wpi.cs.connectn.tree.Move;
 
@@ -8,7 +8,8 @@ import edu.wpi.cs.connectn.tree.Move;
  * A JournaledBoard keeps track of every move made and allows moves to be reverted.
  */
 public class JournaledBoard extends Board {
-	private final ArrayList<Move> moves;
+	/** The move log. The most recent move is stored on top of the stack. */
+	protected final Stack<Move> moveLog;
 	
 	/**
 	 * Constructor.
@@ -21,21 +22,41 @@ public class JournaledBoard extends Board {
 	 */
 	public JournaledBoard(int height, int width, int N) {
 		super(height, width, N);
-		moves = new ArrayList<Move>();
+		moveLog = new Stack<Move>();
 	}
 	
 	/**
-	 * Performs a move on the board.
-	 * 
-	 * @param	move	A Move.
+	 * @see edu.wpi.cs.connectn.board.Board#doMove(Move)
 	 */
 	@Override
-	public void doMove(Move move) {
+	public void doMove(Move move) throws RuntimeException, IndexOutOfBoundsException {
 		super.doMove(move);
-		moves.add(move);
+		moveLog.push(move);	// add the move to the front of move log
 	}
 	
+	/**
+	 * Reverts 1 move.
+	 * 
+	 * @see JournaledBoard#revert(int)
+	 */
+	public void revert() {
+		revert(1);
+	}
+	
+	/**
+	 * Reverts the specified number of moves made.
+	 * 
+	 * @param numMoves	The number of moves to revert.
+	 */
 	public void revert(int numMoves) {
+		if (numMoves > moveLog.size()) {
+			throw new RuntimeException("There are not enough moves to revert.");
+		}
 		
+		Move currentMove;
+		for (int i = 0; i < numMoves; i++) {
+			currentMove =  moveLog.pop();
+			this.columns[currentMove.getColumn()].removePiece();
+		}
 	}
 }
