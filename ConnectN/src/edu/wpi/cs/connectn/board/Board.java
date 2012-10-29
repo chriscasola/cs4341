@@ -107,10 +107,10 @@ public class Board {
 	 * @throws IndexOutOfBoundsException	If the given Move's column number is too high or is negative.
 	 */
 	public void doMove(Move move) throws RuntimeException, IndexOutOfBoundsException {
-		if (move.getColumn() < columns.length) {
+		if (move.getColumn() >= columns.length) {
 			throw new IndexOutOfBoundsException("Column index is too high.");
 		}
-		else if(move.getColumn() >= 0) {
+		else if(move.getColumn() < 0) {
 			throw new IndexOutOfBoundsException("Column index is negative.");
 		}
 		else {
