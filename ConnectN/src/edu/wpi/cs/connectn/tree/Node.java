@@ -1,6 +1,7 @@
 package edu.wpi.cs.connectn.tree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Node {
 	protected int utility;
 	
 	/** The parent node of this node */
-	protected final Node parent;
+	protected Node parent;
 	
 	/** The depth of this node in the tree */
 	protected final int depth;
@@ -64,9 +65,20 @@ public class Node {
 	 * Returns the child representing the given column
 	 * @param colNum the column
 	 * @return the child representing the given column
+	 * @throws RuntimeException		If no child node exists with the given column number.
 	 */
-	public Node getChild(int colNum) {
-		return children.get(colNum);
+	public Node getChild(int colNum) throws RuntimeException {
+		Iterator<Node> cIterator = children.iterator();
+		Node childNode;
+		
+		while (cIterator.hasNext()) {
+			childNode = cIterator.next();
+			if (childNode != null && childNode.getMove().getColumn() == colNum) {
+				return childNode;
+			}
+		}
+		
+		throw new RuntimeException("No child node exists with the given column number.");
 	}
 	
 	/**
@@ -89,6 +101,15 @@ public class Node {
 	 */
 	public void setUtility(int utility) {
 		this.utility = utility;
+	}
+	
+	/**
+	 * Sets the Node's parent to the given Node.
+	 * 
+	 * @param parent	The new parent Node.
+	 */
+	protected void setParent(Node parent) {
+		this.parent = parent;
 	}
 
 	/**
