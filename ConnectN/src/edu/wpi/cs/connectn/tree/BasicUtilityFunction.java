@@ -2,9 +2,9 @@ package edu.wpi.cs.connectn.tree;
 
 import edu.wpi.cs.connectn.board.GameState;
 
-public class BasicUtilityFunction {
+public class BasicUtilityFunction implements UtilityFunction {
 
-	public static float calcUtility(Node node, GameState nodeState) {
+	public float calcUtility(Node node, GameState nodeState) {
 		switch (nodeState) {
 		case DRAW:
 			return 0f;

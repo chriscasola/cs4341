@@ -17,7 +17,7 @@ public class Node {
 	protected final Move move;
 	
 	/** The utility of being at this node (or game state) */
-	protected int utility;
+	protected float utility;
 	
 	/** The parent node of this node */
 	protected Node parent;
@@ -25,6 +25,13 @@ public class Node {
 	/** The depth of this node in the tree */
 	protected final int depth;
 	
+	/**
+	 * Constructs a new Node with the given Move, parent node, utility, and depth
+	 * @param move the move this node will represent
+	 * @param parent the parent of this node
+	 * @param utility the utility of being at the state represented by this node
+	 * @param depth the depth in the tree of this node
+	 */
 	public Node(Move move, Node parent, int utility, int depth) {
 		this.move = move;
 		this.parent = parent;
@@ -58,7 +65,16 @@ public class Node {
 	 * @param child the child to add to this node
 	 */
 	public void addChild(Node child) {
-		this.children.add(child.move.getColumn(), child);
+		this.children.add(child);
+	}
+	
+	public String toString() {
+		String retVal = "";
+		retVal += "Move: Column " + move.getColumn() + " Owner " + move.getOwner() + "; Depth: " + depth + "\n";
+		for (int i = 0; i < children.size(); i++) {
+			retVal += children.get(i).toString();
+		}
+		return retVal;
 	}
 	
 	/**
@@ -92,14 +108,14 @@ public class Node {
 	/**
 	 * @return the utility
 	 */
-	public int getUtility() {
+	public float getUtility() {
 		return utility;
 	}
 
 	/**
 	 * @param utility the utility to set
 	 */
-	public void setUtility(int utility) {
+	public void setUtility(float utility) {
 		this.utility = utility;
 	}
 	
