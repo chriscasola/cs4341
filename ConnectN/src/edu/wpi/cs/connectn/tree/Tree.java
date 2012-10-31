@@ -1,5 +1,7 @@
 package edu.wpi.cs.connectn.tree;
 
+import java.util.Iterator;
+
 /**
  * Keeps track of a tree.
  */
@@ -52,5 +54,16 @@ public class Tree {
 	 */
 	public Node getHead() {
 		return headNode;
+	}
+	
+	public Move getBestMove() {
+		Iterator<Node> iter = headNode.children.iterator();
+		while (iter.hasNext()) {
+			Node currNode = iter.next();
+			if (currNode.utility == headNode.utility) {
+				return currNode.getMove();
+			}
+		}
+		throw new RuntimeException();
 	}
 }
