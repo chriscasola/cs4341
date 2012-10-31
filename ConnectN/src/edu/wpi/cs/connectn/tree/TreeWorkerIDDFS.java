@@ -50,11 +50,11 @@ public class TreeWorkerIDDFS extends TreeWorkerDLS {
 			result = super.buildTree(startNode, i);
 		}
 		
-		if (result == null) {
-			throw new NullPointerException("Result is inexplicably null");
-		}
-		else {
+		//if (result == null) {
+			//throw new NullPointerException("Result is inexplicably null");
+		//}
+		//else {
 			return result;
-		}
+		//}
 	}
 }
