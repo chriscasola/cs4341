@@ -2,23 +2,30 @@ package edu.wpi.cs.connectn.tree;
 
 import edu.wpi.cs.connectn.board.JournaledBoard;
 
+/**
+ * Performs an Iterative Deepening Depth First Search on a given Node.
+ */
 public class TreeWorkerIDDFS extends TreeWorkerDLS {
 	
+	/** The maximum depth to search to. */
 	protected int maxDepth;
 	
+	/** The maximum depth already visited. */
 	protected int depthVisited;
 	
 	
 	/**
-	 * Constructs a new TreeWorkerIDDFS with the given starting node and journaled board
-	 * @param startNode the node to start building at
-	 * @param jboard the journaled board to track moves (and possibly already containing some moves)
+	 * Constructs a new TreeWorkerIDDFS with the given starting Node and JournaledBoard.
+	 * 
+	 * @param startNode		The Node to start the search at.
+	 * @param jboard		The JournaledBoard used to track moves (may already contain some moves).
+	 * @param maxDepth		The maximum depth to search to.
+	 * @param depthVisited	The maximum depth already visited.
 	 */
-	public TreeWorkerIDDFS(Node startNode, JournaledBoard jboard, int maxDepth, int depthVisited) {
-		this.startNode = startNode;
-		this.jboard = jboard;
-		this.utilityFunction = new BasicUtilityFunction();
-		this.heuristicFunction = new BasicHeuristicFunction();
+	public TreeWorkerIDDFS(JournaledBoard jboard, Node startNode, int maxDepth, int depthVisited, HeuristicFunction heuristicFunction, UtilityFunction utilityFunction) {
+		super(jboard, startNode, heuristicFunction, utilityFunction);
+		this.maxDepth = maxDepth;
+		this.depthVisited = depthVisited;
 	}
 	
 	@Override
