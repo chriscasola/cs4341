@@ -19,10 +19,18 @@ public class TreeWorkerDLS extends Thread {
 	/** The Utility function to use */
 	protected UtilityFunction utilityFunction;
 	
-	
-	@Override
-	public void run() {
-		
+	/**
+	 * Constructs a new TreeWorkerDLS
+	 * @param jboard the JournaledBoard
+	 * @param startNode the node to start the search at
+	 * @param heuristicFunction the heuristic function to utilize
+	 * @param utilityFunction the utility function to utilize
+	 */
+	public TreeWorkerDLS(JournaledBoard jboard, Node startNode, HeuristicFunction heuristicFunction, UtilityFunction utilityFunction) {
+		this.jboard = jboard;
+		this.startNode = startNode;
+		this.heuristicFunction = heuristicFunction;
+		this.utilityFunction = utilityFunction;
 	}
 	
 	/**
