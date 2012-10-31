@@ -38,7 +38,7 @@ public class TreeWorkerDLS extends Thread {
 	 * 
 	 * @param startNode		The Node to start at.
 	 * @param depth			The depth to search to.
-	 * @return	The bottom Node with the optimal utility value.
+	 * @return	The Node that will most likely be visited in depth moves.
 	 */
 	protected Node buildTree(Node startNode, int depth) {
 		Minimax nodeOwner = startNode.getMove().getOwner();
@@ -91,16 +91,18 @@ public class TreeWorkerDLS extends Thread {
 				// Do Min/Max
 				if (startNode.getMove().getOwner() == Minimax.MAX && nextChildNode.getUtility() > startNode.getUtility()) {
 					startNode.setUtility(nextChildNode.getUtility());
+					bestNode = bestNodeTemp;
 				}
 				else if (startNode.getMove().getOwner() == Minimax.MIN && nextChildNode.getUtility() < startNode.getUtility()) {
 					startNode.setUtility(nextChildNode.getUtility());
+					bestNode = bestNodeTemp;
 				}
 				
 				// If bestNodeTemp has a higher utility than bestNode, set bestNode to bestNodeTemp
-				if (bestNodeTemp.getUtility() > bestNode.getUtility()) {
+				/*if (bestNodeTemp.getUtility() > bestNode.getUtility()) {
 					bestNode = bestNodeTemp;
 					bestNodeTemp = null;
-				}
+				}*/
 			}
 		}
 		
