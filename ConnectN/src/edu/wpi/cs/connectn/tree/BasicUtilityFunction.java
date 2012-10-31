@@ -7,7 +7,12 @@ import edu.wpi.cs.connectn.board.GameState;
  * of the game at the given node and the depth of the node in the tree.
  */
 public class BasicUtilityFunction implements UtilityFunction {
-
+	
+	/**
+	 * Calculates the utility of a given Node based on the GameState and the Node's depth.
+	 * 
+	 * @see UtilityFunction#calcUtility(Node, GameState)
+	 */
 	public float calcUtility(Node node, GameState nodeState) {
 		switch (nodeState) {
 		case DRAW:
