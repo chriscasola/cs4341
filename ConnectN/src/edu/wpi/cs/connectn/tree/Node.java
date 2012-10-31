@@ -5,8 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Represents a tree node
- *
+ * Represents a Node in the Tree.
  */
 public class Node {
 	
@@ -26,11 +25,12 @@ public class Node {
 	protected final int depth;
 	
 	/**
-	 * Constructs a new Node with the given Move, parent node, utility, and depth
-	 * @param move the move this node will represent
-	 * @param parent the parent of this node
-	 * @param utility the utility of being at the state represented by this node
-	 * @param depth the depth in the tree of this node
+	 * Constructs a new Node with the given Move, parent Node, utility, and depth.
+	 * 
+	 * @param move		The Move that this Node will represent.
+	 * @param parent	The parent Node of this Node.
+	 * @param utility	The utility of this Node.
+	 * @param depth		The absolute depth of this Node in the Tree.
 	 */
 	public Node(Move move, Node parent, int utility, int depth) {
 		this.move = move;
@@ -41,33 +41,40 @@ public class Node {
 	}
 
 	/**
-	 * Constructs a new Node with the given Move and parent Node
-	 * @param move the move this node will represent
-	 * @param parent the parent of this node
+	 * Constructs a new Node with the given Move and parent Node.
+	 * 
+	 * @param move		The move that this Node will represent.
+	 * @param parent	The parent Node of this Node.
 	 */
 	public Node(Move move, Node parent) {
 		this(move, parent, 0);
 	}
 	
 	/**
-	 * Constructs a new Node with the given Move and parent Node
-	 * @param move the move this node will represent
-	 * @param parent the parent of this node
-	 * @param utility the utility of being at this node (or game state)
+	 * Constructs a new Node with the given Move and parent Node.
+	 * 
+	 * @param move		The Move that this Node represents.
+	 * @param parent	The parent Node of this Node. May be null.
+	 * @param utility	The utility of this Node.
 	 */
 	public Node(Move move, Node parent, int utility) {
 		this(move, parent, utility, 0);
 	}
 	
 	/**
-	 * Adds a child to this node. Each child will be inserted into the list
-	 * of children in order, based on the column the child represents.
-	 * @param child the child to add to this node
+	 * Adds a child Node to this Node.
+	 * 
+	 * @param child		The child Node to add to this Node.
 	 */
 	public void addChild(Node child) {
 		this.children.add(child);
 	}
 	
+	/**
+	 * Returns a String representation of this Node.
+	 * 
+	 * @return A String representing this Node.
+	 */
 	public String toString() {
 		String retVal = "";
 		retVal += "Move: Column " + move.getColumn() + " Owner " + move.getOwner() + "; Depth: " + depth + "\n";
@@ -89,9 +96,30 @@ public class Node {
 	}
 	
 	/**
-	 * Returns the child representing the given column
-	 * @param colNum the column
-	 * @return the child representing the given column
+	 * Sets the Node's parent to the given Node.
+	 * 
+	 * @param parent	The new parent Node.
+	 */
+	protected void setParent(Node parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * Sets the utility of the Node to the given utility.
+	 * 
+	 * @param utility	The new utility.
+	 */
+	public void setUtility(float utility) {
+		this.utility = utility;
+	}
+	
+	/**
+	 * Returns the child Node that has a Move in the given colNum.
+	 * 
+	 * @param colNum	A column number.
+	 * 
+	 * @return The child Node which has a move in the given column.
+	 * 
 	 * @throws RuntimeException		If no child node exists with the given column number.
 	 */
 	public Node getChild(int colNum) throws RuntimeException {
@@ -109,54 +137,47 @@ public class Node {
 	}
 	
 	/**
-	 * Returns a list containing the children of this node
-	 * @return a list containing the children of this node
+	 * Returns a List<Node> containing the children of this node.
+	 * 
+	 * @return A List<Node> containing the children of this node.
 	 */
 	public List<Node> getChildren() {
 		return children;
 	}
 	
 	/**
-	 * @return the utility
+	 * Returns an integer representing the absolute depth of the Node.
+	 * 
+	 * @return An integer representing the depth of the Node.
 	 */
-	public float getUtility() {
-		return utility;
-	}
-
-	/**
-	 * @param utility the utility to set
-	 */
-	public void setUtility(float utility) {
-		this.utility = utility;
+	public int getDepth() {
+		return depth;
 	}
 	
 	/**
-	 * Sets the Node's parent to the given Node.
+	 * Returns the Move belonging to the Node.
 	 * 
-	 * @param parent	The new parent Node.
-	 */
-	protected void setParent(Node parent) {
-		this.parent = parent;
-	}
-
-	/**
-	 * @return the move
+	 * @return The Move
 	 */
 	public Move getMove() {
 		return move;
 	}
 
 	/**
-	 * @return the parent
+	 * Gets the Node's parent Node.
+	 * 
+	 * @return The parent Node.
 	 */
 	public Node getParent() {
 		return parent;
 	}
 	
 	/**
-	 * @return the depth
+	 * Gets the Node's utility.
+	 * 
+	 * @return A float representing the utility of the Node.
 	 */
-	public int getDepth() {
-		return depth;
+	public float getUtility() {
+		return utility;
 	}
 }
