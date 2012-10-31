@@ -77,6 +77,17 @@ public class Node {
 		return retVal;
 	}
 	
+	public String stringifyGraph() {
+		String retVal = "";
+		retVal += move.getOwner() + "(" + move.getColumn() + ", " + utility + ")\n";
+		for (int i = 0; i < children.size(); i++) {
+			for (int j = 0; j < children.get(i).depth; j++)
+				retVal += "\t";
+			retVal += children.get(i).stringifyGraph();
+		}
+		return retVal;
+	}
+	
 	/**
 	 * Returns the child representing the given column
 	 * @param colNum the column

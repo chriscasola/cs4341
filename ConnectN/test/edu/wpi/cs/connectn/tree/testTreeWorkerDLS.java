@@ -28,7 +28,13 @@ public class testTreeWorkerDLS {
 		treeWorker.buildTree(startNode, 1);
 		treeWorker.buildTree(startNode, 2);
 		treeWorker.buildTree(startNode, 3);
-		System.out.println(startNode.toString());
+		treeWorker.buildTree(startNode, 4);
+		treeWorker.buildTree(startNode, 5);
+		treeWorker.buildTree(startNode, 6);
+		treeWorker.buildTree(startNode, 7);
+		treeWorker.buildTree(startNode, 8);
+		treeWorker.buildTree(startNode, 9);
+		System.out.println(startNode.stringifyGraph());
 		assertTrue(true);
 	}
 
