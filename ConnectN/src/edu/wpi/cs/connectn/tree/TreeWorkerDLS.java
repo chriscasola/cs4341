@@ -79,6 +79,7 @@ public class TreeWorkerDLS extends Thread {
 			Node bestNodeTemp;
 			Node nextChildNode;
 			Iterator<Node> cIterator = startNode.children.iterator();
+			boolean firstChildVisited = false;
 			
 			// For all child nodes, recurse and do Min/Max
 			while (cIterator.hasNext()) {
@@ -90,7 +91,11 @@ public class TreeWorkerDLS extends Thread {
 				//jboard.revert(); // revert jboard
 				
 				// Do Min/Max
-				if (startNode.getMove().getOwner() == Minimax.MAX && nextChildNode.getUtility() > startNode.getUtility()) {
+				if (!firstChildVisited) {
+					startNode.setUtility(nextChildNode.getUtility());
+					firstChildVisited = true;
+				}
+				else if (startNode.getMove().getOwner() == Minimax.MAX && nextChildNode.getUtility() > startNode.getUtility()) {
 					startNode.setUtility(nextChildNode.getUtility());
 					bestNode = bestNodeTemp;
 				}
