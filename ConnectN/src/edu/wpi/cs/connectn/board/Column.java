@@ -2,9 +2,6 @@ package edu.wpi.cs.connectn.board;
 
 /**
  * Represents a Column in the Connect-N grid
- * 
- * @author Chris
- *
  */
 public class Column {
 
@@ -20,7 +17,7 @@ public class Column {
 	/**
 	 * Constructs a new Column with the specified height (available slots)
 	 * 
-	 * @param height the number of pieces that can fit in this column
+	 * @param height	The number of pieces that can fit in this Column.
 	 */
 	public Column(int height) {
 		this.height = height;
@@ -34,8 +31,9 @@ public class Column {
 	}
 	
 	/**
-	 * A copy constructor
-	 * @param otherColumn the column to copy
+	 * Creates a new Column that is a duplicate of the Column.
+	 * 
+	 * @param otherColumn	The Column to copy.
 	 */
 	protected Column(Column otherColumn) {
 		this(otherColumn.height);
@@ -50,7 +48,7 @@ public class Column {
 	 * Drops a new piece in this column. The new piece is placed in
 	 * the next available slot.
 	 * 
-	 * @param piece the piece to place (MAX or MIN)
+	 * @param piece		The piece to place (MAX or MIN)
 	 * @throws RuntimeException		if the column is already full
 	 */
 	public void dropPiece(Minimax piece) throws RuntimeException {
@@ -63,9 +61,11 @@ public class Column {
 	}
 
 	/**
-	 * Returns the piece at the given position
-	 * @param pos the position to retrieve a piece from
-	 * @return the piece at the given position
+	 * Returns the piece at the given position.
+	 * 
+	 * @param pos	The position to retrieve a piece from.
+	 * 
+	 * @return	A Minimax value representing the piece at the given position.
 	 */
 	public Minimax getPiece(int pos) {
 		if (pos < height) {
@@ -85,7 +85,11 @@ public class Column {
 		slots[--numPieces] = Minimax.EMPTY;
 	}
 
-	
+	/**
+	 * Determines whether or no the column is full.
+	 * 
+	 * @return	True if full, false otherwise.
+	 */
 	public boolean isFull() {
 		if (numPieces >= height) {
 			return true;
@@ -95,6 +99,11 @@ public class Column {
 		}
 	}
 	
+	/**
+	 * Returns a duplicate of the column.
+	 * 
+	 * @return	A duplicate Column.
+	 */
 	public Column duplicate() {
 		return new Column(this);
 	}

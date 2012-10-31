@@ -26,8 +26,9 @@ public class JournaledBoard extends Board {
 	}
 	
 	/**
-	 * A copy constructor
-	 * @param otherBoard the board to copy
+	 * Constructs a JournaledBoard that is a duplicate of the given JournaledBoard.
+	 * 
+	 * @param otherBoard 	The JournaledBoard to duplicate.
 	 */
 	@SuppressWarnings("unchecked")
 	public JournaledBoard(JournaledBoard otherBoard) {
@@ -74,6 +75,11 @@ public class JournaledBoard extends Board {
 		}
 	}
 	
+	/**
+	 * Returns a duplicate of the JournaledBoard.
+	 * 
+	 * @return	A duplicate JournaledBoard.
+	 */
 	public JournaledBoard duplicate() {
 		return new JournaledBoard(this);
 	}
