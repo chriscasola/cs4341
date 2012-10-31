@@ -28,15 +28,19 @@ public class TreeWorkerIDDFS extends TreeWorkerDLS {
 		this.depthVisited = depthVisited;
 	}
 	
+	/**
+	 * @see Thread#run()
+	 */
 	@Override
 	public void run() {
 		buildTree();
 	}
 	
 	/**
-	 * Builds part of the tree, starting at the given node and 
-	 * @param startNode
-	 * @return
+	 * Performs an Iterative Deepening Depth First Search by performing a series of Depth Limited Searches 
+	 * at depths from depthVisited+1 through maxDepth.
+	 * 
+	 * @return	The Node at the maxDepth that is most likely to be chosen after maxDepth moves.
 	 */
 	protected Node buildTree() {
 		
