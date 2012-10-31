@@ -2,16 +2,33 @@ package edu.wpi.cs.connectn.tree;
 
 import edu.wpi.cs.connectn.board.JournaledBoard;
 
+/**
+ * Manages searching.
+ */
 public class SearchManager {
 	
+	/** The JournaledBoard representing past moves. */
 	protected final JournaledBoard jboard;
 	
+	/** The Tree containing potential Moves to make. */
 	protected final Tree tree;
 	
 	protected int timeToMove;
 	
+	/** The current depth that the graph has been searched. */
 	protected int currentDepth;
 	
+	/**
+	 * Constructs a SearchManager.
+	 * 
+	 * TODO: update this comment
+	 * 
+	 * @param timeToMove
+	 * @param height
+	 * @param width
+	 * @param N
+	 * @param firstMove
+	 */
 	protected SearchManager(int timeToMove, int height, int width, int N, Move firstMove) {
 		this.timeToMove = timeToMove;
 		this.tree = new Tree(new Node(firstMove, null));
@@ -19,10 +36,20 @@ public class SearchManager {
 		this.currentDepth = 0;
 	}
 	
+	/**
+	 * Make a Move in the given column number.
+	 * 
+	 * @param colNum	An integer representing a column number.
+	 */
 	public void makeMove(int colNum) {
 		tree.makeMove(colNum);
 	}
 	
+	/**
+	 * Finds, performs in the Tree, and returns the optimal Move.
+	 * 
+	 * @return	An integer representing the column in which the optimal Move takes place.
+	 */
 	public int findMaxMove() {
 		
 		// should check for time elapsed
@@ -51,6 +78,4 @@ public class SearchManager {
 		
 		return bestChild.getMove().getColumn();
 	}
-	
-	
 }
