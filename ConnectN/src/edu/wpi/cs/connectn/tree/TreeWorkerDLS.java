@@ -86,7 +86,7 @@ public class TreeWorkerDLS extends Thread {
 				
 				// Get the bestNode for the nextChildNode via recursion
 				bestNodeTemp = buildTree(nextChildNode, depth-1);
-				jboard.revert(); // revert jboard
+				//jboard.revert(); // revert jboard
 				
 				// Do Min/Max
 				if (startNode.getMove().getOwner() == Minimax.MAX && nextChildNode.getUtility() > startNode.getUtility()) {
@@ -105,7 +105,8 @@ public class TreeWorkerDLS extends Thread {
 				}*/
 			}
 		}
-		
+
+		jboard.revert(); // revert jboard
 		return bestNode;
 	}
 }
