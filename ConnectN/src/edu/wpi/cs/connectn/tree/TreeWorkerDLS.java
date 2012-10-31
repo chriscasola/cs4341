@@ -52,11 +52,12 @@ public class TreeWorkerDLS extends Thread {
 			// If the game is over at the startNode, use the utility function to calculate its utility
 			if (currState != null && currState != GameState.IN_PROGRESS) {
 				startNode.setUtility(utilityFunction.calcUtility(startNode, currState));
-				return startNode;
+				bestNode = startNode;
 			}
 			// If the game is still in progress at the startNode, use the heuristic function to calculate its utility 
 			else if (currState == GameState.IN_PROGRESS) {
 				startNode.setUtility(heuristicFunction.calcHeuristic(jboard, startNode));
+				bestNode = startNode;
 			}
 			// If the currState is an unexpected value, throw an exception
 			else {
