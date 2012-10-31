@@ -28,7 +28,7 @@ public class SearchManager {
 		// should check for time elapsed
 		int count = 10;
 		while (count-- > 0) {
-			TreeWorkerIDDFS mainWorker = new TreeWorkerIDDFS(tree.getHead(), jboard.duplicate(), currentDepth + 5, currentDepth);
+			TreeWorkerIDDFS mainWorker = new TreeWorkerIDDFS(jboard.duplicate(), tree.getHead(), currentDepth + 5, currentDepth, new BasicHeuristicFunction(), new BasicUtilityFunction());
 			mainWorker.run();
 			currentDepth += 5;
 		}
