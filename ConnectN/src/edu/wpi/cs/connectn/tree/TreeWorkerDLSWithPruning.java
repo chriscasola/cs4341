@@ -6,7 +6,7 @@ import edu.wpi.cs.connectn.board.GameState;
 import edu.wpi.cs.connectn.board.JournaledBoard;
 import edu.wpi.cs.connectn.board.Minimax;
 
-public class TreeWorkerDLS extends Thread {
+public class TreeWorkerDLSWithPruning extends Thread {
 	/** The JournaledBoard that this TreeWorker will use to keep track of changes to the board */
 	protected JournaledBoard jboard;
 	
@@ -26,7 +26,7 @@ public class TreeWorkerDLS extends Thread {
 	 * @param heuristicFunction the heuristic function to utilize
 	 * @param utilityFunction the utility function to utilize
 	 */
-	public TreeWorkerDLS(JournaledBoard jboard, Node startNode, HeuristicFunction heuristicFunction, UtilityFunction utilityFunction) {
+	public TreeWorkerDLSWithPruning(JournaledBoard jboard, Node startNode, HeuristicFunction heuristicFunction, UtilityFunction utilityFunction) {
 		this.jboard = jboard;
 		this.startNode = startNode;
 		this.heuristicFunction = heuristicFunction;
@@ -102,6 +102,10 @@ public class TreeWorkerDLS extends Thread {
 				else if (startNode.getMove().getOwner() == Minimax.MIN && nextChildNode.getUtility() < startNode.getUtility()) {
 					startNode.setUtility(nextChildNode.getUtility());
 					bestNode = bestNodeTemp;
+				}
+				
+				if ((startNode.getMove().getOwner() == Minimax.MAX) && (startNode.getUtility() > startNode.getParent().getUtility())) {
+					break;
 				}
 			}
 		}

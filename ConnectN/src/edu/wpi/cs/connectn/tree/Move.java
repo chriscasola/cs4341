@@ -37,4 +37,20 @@ public class Move {
 	public Minimax getOwner() {
 		return owner;
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) {
+			return false;
+		}
+		else if (!(other instanceof Move)) {
+			return false;
+		}
+		else if ((this.column == ((Move)other).column) && (this.owner == ((Move)other).owner)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
