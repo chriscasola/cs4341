@@ -80,7 +80,13 @@ public class TreeWorkerDLS extends Thread {
 				bestNodeTemp = buildTree(nextChildNode, depth-1);
 				jboard.revert(); // revert jboard
 				
-				// TODO MIN MAX HERE
+				// Do Min/Max
+				if (startNode.getMove().getOwner() == Minimax.MAX && nextChildNode.getUtility() > startNode.getUtility()) {
+					startNode.setUtility(nextChildNode.getUtility());
+				}
+				else if (startNode.getMove().getOwner() == Minimax.MIN && nextChildNode.getUtility() < startNode.getUtility()) {
+					startNode.setUtility(nextChildNode.getUtility());
+				}
 				
 				// If bestNodeTemp has a higher utility than bestNode, set bestNode to bestNodeTemp
 				if (bestNodeTemp.getUtility() > bestNode.getUtility()) {
