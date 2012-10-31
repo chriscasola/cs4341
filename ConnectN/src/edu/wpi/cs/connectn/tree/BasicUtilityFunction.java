@@ -2,6 +2,10 @@ package edu.wpi.cs.connectn.tree;
 
 import edu.wpi.cs.connectn.board.GameState;
 
+/**
+ * A basic utility function that calculates utility based on the state
+ * of the game at the given node and the depth of the node in the tree.
+ */
 public class BasicUtilityFunction implements UtilityFunction {
 
 	public float calcUtility(Node node, GameState nodeState) {

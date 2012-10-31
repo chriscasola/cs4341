@@ -26,6 +26,20 @@ public class JournaledBoard extends Board {
 	}
 	
 	/**
+	 * A copy constructor
+	 * @param otherBoard the board to copy
+	 */
+	@SuppressWarnings("unchecked")
+	public JournaledBoard(JournaledBoard otherBoard) {
+		super(otherBoard.height, otherBoard.width, otherBoard.N);
+		
+		for (int i = 0; i < otherBoard.width; i++) {
+			this.columns[i] = otherBoard.columns[i].duplicate();
+		}
+		this.moveLog = (Stack<Move>)otherBoard.moveLog.clone();
+	}
+	
+	/**
 	 * @see edu.wpi.cs.connectn.board.Board#doMove(Move)
 	 */
 	@Override
@@ -58,5 +72,9 @@ public class JournaledBoard extends Board {
 			currentMove =  moveLog.pop();
 			this.columns[currentMove.getColumn()].removePiece();
 		}
+	}
+	
+	public JournaledBoard duplicate() {
+		return new JournaledBoard(this);
 	}
 }

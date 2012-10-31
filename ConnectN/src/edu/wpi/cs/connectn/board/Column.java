@@ -32,6 +32,19 @@ public class Column {
 			slots[i] = Minimax.EMPTY;
 		}
 	}
+	
+	/**
+	 * A copy constructor
+	 * @param otherColumn the column to copy
+	 */
+	protected Column(Column otherColumn) {
+		this(otherColumn.height);
+		this.numPieces = otherColumn.numPieces;
+				
+		for (int i = 0; i < height; i++) {
+			this.slots[i] = otherColumn.slots[i];
+		}
+	}
 
 	/**
 	 * Drops a new piece in this column. The new piece is placed in
@@ -80,5 +93,9 @@ public class Column {
 		else {
 			return false;
 		}
+	}
+	
+	public Column duplicate() {
+		return new Column(this);
 	}
 }
