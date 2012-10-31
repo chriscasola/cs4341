@@ -17,24 +17,21 @@ public class testTreeWorkerDLS {
 
 	@Before
 	public void setUp() throws Exception {
-		Move firstMove = new Move(1, Minimax.MAX);
-		jboard = new JournaledBoard(3, 3, 2);
+		Move firstMove = new Move(4, Minimax.MAX);
+		jboard = new JournaledBoard(8, 9, 6);
 		startNode = new Node(firstMove, null);
 		treeWorker = new TreeWorkerDLS(jboard, startNode, new BasicHeuristicFunction(), new BasicUtilityFunction());
 	}
 
 	@Test
 	public void test1() {
-		treeWorker.buildTree(startNode, 1);
-		treeWorker.buildTree(startNode, 2);
-		treeWorker.buildTree(startNode, 3);
-		treeWorker.buildTree(startNode, 4);
-		treeWorker.buildTree(startNode, 5);
-		treeWorker.buildTree(startNode, 6);
-		treeWorker.buildTree(startNode, 7);
-		treeWorker.buildTree(startNode, 8);
-		treeWorker.buildTree(startNode, 9);
-		System.out.println(startNode.stringifyGraph());
+		long startTime = System.currentTimeMillis();
+		for (int i = 1; i < 9; i++)
+			treeWorker.buildTree(startNode, i);
+		System.out.println("Elapsed time: " + (System.currentTimeMillis() - startTime));
+		System.out.flush();
+		//System.out.println(startNode.stringifyGraph());
+		//System.out.flush();
 		assertTrue(true);
 	}
 
