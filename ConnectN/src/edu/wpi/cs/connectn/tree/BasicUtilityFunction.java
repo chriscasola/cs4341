@@ -18,9 +18,11 @@ public class BasicUtilityFunction implements UtilityFunction {
 		case DRAW:
 			return 0f;
 		case MAX:
-			return 1.0f / node.getDepth();
+			return 100f;
+			//return .0f / node.getDepth();
 		case MIN:
-			return -1.0f / node.getDepth();
+			return -100f;
+			//return -1.0f / node.getDepth();
 		default:
 			throw new RuntimeException("Utility function can not be evaluated for a non-leaf node!");
 		}

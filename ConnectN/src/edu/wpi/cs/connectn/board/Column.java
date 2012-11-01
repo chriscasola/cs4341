@@ -100,6 +100,13 @@ public class Column {
 	}
 	
 	/**
+	 * @return the number of pieces in this column
+	 */
+	public int getNumPieces() {
+		return numPieces;
+	}
+	
+	/**
 	 * Returns a duplicate of the column.
 	 * 
 	 * @return	A duplicate Column.

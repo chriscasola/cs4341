@@ -1,7 +1,5 @@
 package edu.wpi.cs.connectn.tree;
 
-import java.util.HashMap;
-
 import edu.wpi.cs.connectn.board.Board;
 import edu.wpi.cs.connectn.board.Minimax;
 
@@ -27,8 +25,8 @@ public class AdvancedHeuristicFunction implements HeuristicFunction {
 		countCheckers(0, board.getHeight() - 1, Direction.RIGHT, board);
 		countCheckers(0, board.getHeight() - 1, Direction.UPRIGHT, board);
 		
-		float result = 0f;
-	
+		Double result = 0.0;
+		/*
 		for (int i = 2; i < board.getN(); i++) {
 			if (counts[i] > 0) {
 				counts[i] = 1;
@@ -36,11 +34,16 @@ public class AdvancedHeuristicFunction implements HeuristicFunction {
 			else if (counts[i] < 0) {
 				counts[i] = -1;
 			}
+			//result += (counts[i] * i * 1.0) / (board.getN() ^ 2);
 			
-			result += counts[i] * (i / (board.getN() ^ 2)) * 2;
-		}
+		}*/
 		
-		return result;
+		for (int i = 2; i < board.getN(); i++) {
+			System.out.println(counts[i]);
+			result += counts[i] * 1.0;
+		}
+		//System.out.println(result);
+		return result.floatValue();
 	}
 
 	protected void countCheckers(int col, int row, Direction direction, Board board) {

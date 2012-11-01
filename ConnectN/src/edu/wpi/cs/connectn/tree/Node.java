@@ -180,4 +180,8 @@ public class Node {
 	public float getUtility() {
 		return utility;
 	}
+	
+	public void clearChildren() {
+		this.children = new ArrayList<Node>();
+	}
 }
