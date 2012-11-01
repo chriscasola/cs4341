@@ -12,7 +12,6 @@ public class AnotherHeuristicFunction implements HeuristicFunction {
 	@Override
 	public float calcHeuristic(Board board, Node node) {
 		Integer result = getNumAdjacent(board, node.move);
-		System.out.println(result.floatValue());
 		return result.floatValue();
 	}
 
