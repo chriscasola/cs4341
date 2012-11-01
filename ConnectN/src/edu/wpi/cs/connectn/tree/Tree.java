@@ -56,6 +56,11 @@ public class Tree {
 		return headNode;
 	}
 	
+	/**
+	 * Returns the next best Move (in terms of utility).
+	 * 
+	 * @return A Move representing the next best Move (in terms of utility).
+	 */
 	public Move getBestMove() {
 		Iterator<Node> iter = headNode.children.iterator();
 		while (iter.hasNext()) {

@@ -13,28 +13,8 @@ public class SearchManager {
 	/** The Tree containing potential Moves to make. */
 	protected final Tree tree;
 
-	protected int timeToMove;
-
 	/** The current depth that the graph has been searched. */
 	protected int currentDepth;
-
-	/**
-	 * Constructs a SearchManager.
-	 * 
-	 * TODO: update this comment
-	 * 
-	 * @param timeToMove
-	 * @param height
-	 * @param width
-	 * @param N
-	 * @param firstMove
-	 */
-	/*protected SearchManager(int timeToMove, int height, int width, int N, Move firstMove) {
-		this.timeToMove = timeToMove;
-		this.tree = new Tree(new Node(firstMove, null));
-		this.jboard = new JournaledBoard(height, width, N);
-		this.currentDepth = 0;
-	}*/
 
 	public SearchManager(int boardHeight, int boardWidth, int numToWin, Move firstMove) {
 		this.tree = new Tree(new Node(firstMove, null));
@@ -52,7 +32,12 @@ public class SearchManager {
 		tree.makeMove(move.getColumn());
 		currentDepth--;
 	}
-
+	
+	/**
+	 * Performs a search to a maximum of the given depth.
+	 * 
+	 * @param depth		The maximum depth to search to.
+	 */
 	public void searchToDepth(int depth) {
 		if (depth > currentDepth) {
 			TreeWorkerIDDFS mainWorker = new TreeWorkerIDDFS(jboard.duplicate(), tree.getHead(), depth, currentDepth, new AnotherHeuristicFunction(), new BasicUtilityFunction());
@@ -61,6 +46,11 @@ public class SearchManager {
 		}
 	}
 
+	/**
+	 * Gets the next best Move.
+	 * 
+	 * @return	A Move representing the best Move.
+	 */
 	public Move getBestMove() {
 		Node bestChild = null;
 
@@ -76,39 +66,5 @@ public class SearchManager {
 		}
 
 		return bestChild.getMove();
-	}
-
-	/**
-	 * Finds, performs in the Tree, and returns the optimal Move.
-	 * 
-	 * @return	An integer representing the column in which the optimal Move takes place.
-	 */
-	public int findMaxMove() {
-
-		// should check for time elapsed
-		int count = 10;
-		while (count-- > 0) {
-			TreeWorkerIDDFS mainWorker = new TreeWorkerIDDFS(jboard.duplicate(), tree.getHead(), currentDepth + 5, currentDepth, new BasicHeuristicFunction(), new BasicUtilityFunction());
-			mainWorker.run();
-			currentDepth += 5;
-		}
-
-		Node bestChild = null;
-
-		for (Node child : tree.getHead().getChildren()) {
-			if (bestChild == null) {
-				bestChild = child;
-			}
-			else {
-				if (bestChild.getUtility() < child.getUtility()) {
-					bestChild = child;
-				}
-			}
-		}
-
-		tree.makeMove(bestChild.getMove());
-		currentDepth--;
-
-		return bestChild.getMove().getColumn();
 	}
 }
