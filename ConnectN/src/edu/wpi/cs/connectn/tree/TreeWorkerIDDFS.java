@@ -5,7 +5,7 @@ import edu.wpi.cs.connectn.board.JournaledBoard;
 /**
  * Performs an Iterative Deepening Depth First Search on a given Node.
  */
-public class TreeWorkerIDDFS extends TreeWorkerDLS {
+public class TreeWorkerIDDFS extends TreeWorkerDLSWithPruning {
 	
 	/** The maximum depth to search to. */
 	protected int maxDepth;

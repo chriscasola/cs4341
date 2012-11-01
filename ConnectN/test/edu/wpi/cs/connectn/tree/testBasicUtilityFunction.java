@@ -21,8 +21,8 @@ public class testBasicUtilityFunction {
 
 	@Test
 	public void test() {
-		assertTrue((1.0f / 48) == f1.calcUtility(n1, GameState.MAX));
-		assertTrue((-1.0f / 48) == f1.calcUtility(n1, GameState.MIN));
+		assertTrue(100f == f1.calcUtility(n1, GameState.MAX));
+		assertTrue(-100f == f1.calcUtility(n1, GameState.MIN));
 		assertTrue(0f == f1.calcUtility(n1, GameState.DRAW));
 		
 		try {

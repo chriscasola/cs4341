@@ -308,6 +308,20 @@ public class Board {
 		return width;
 	}
 	
+	/**
+	 * @return the height of the board
+	 */
+	public int getHeight() {
+		return height;
+	}
+	
+	/**
+	 * @return the N value
+	 */
+	public int getN() {
+		return N;
+	}
+	
 	public Column getColumn(int colNum) {
 		if ((colNum < width) && (colNum >= 0)) {
 			return columns[colNum];

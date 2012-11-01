@@ -41,12 +41,13 @@ public class testBoard {
 		try {
 			b1.doMove(new Move(2, Minimax.MAX));
 			b1.doMove(new Move(2, Minimax.MAX));
+			b1.doMove(new Move(2, Minimax.MAX));
 		}
 		catch (Exception e) {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(-1, b1.checkForWin());
+		assertEquals(GameState.MAX, b1.checkForWin());
 
 		try {
 			b1.doMove(new Move(2, Minimax.MAX));
@@ -55,7 +56,7 @@ public class testBoard {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(1, b1.checkForWin());
+		assertEquals(GameState.MAX, b1.checkForWin());
 
 	}
 
@@ -70,7 +71,7 @@ public class testBoard {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(-1, b1.checkForWin());
+		assertEquals(GameState.IN_PROGRESS, b1.checkForWin());
 
 		try {
 			b1.doMove(new Move(0, Minimax.MIN));
@@ -81,7 +82,7 @@ public class testBoard {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(2, b1.checkForWin());
+		assertEquals(GameState.MIN, b1.checkForWin());
 	}
 
 	@Test
@@ -95,7 +96,7 @@ public class testBoard {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(-1, b1.checkForWin());
+		assertEquals(GameState.IN_PROGRESS, b1.checkForWin());
 
 		try {
 			b1.doMove(new Move(1, Minimax.MAX));
@@ -105,7 +106,7 @@ public class testBoard {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(-1, b1.checkForWin());
+		assertEquals(GameState.IN_PROGRESS, b1.checkForWin());
 
 		try {
 			b1.doMove(new Move(2, Minimax.MIN));
@@ -114,7 +115,7 @@ public class testBoard {
 			fail("Exception message: " + e.getMessage());
 		}
 
-		assertEquals(2, b1.checkForWin());
+		assertEquals(GameState.MIN, b1.checkForWin());
 	}
 
 	@Test

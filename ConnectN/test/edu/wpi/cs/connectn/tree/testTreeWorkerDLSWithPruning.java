@@ -14,7 +14,7 @@ public class testTreeWorkerDLSWithPruning {
 	protected JournaledBoard jboardDLS;
 	protected Node startNodeDLS;
 	
-	protected TreeWorkerDLS treeWorkerDLSPruning;
+	protected TreeWorkerDLSWithPruning treeWorkerDLSPruning;
 	protected JournaledBoard jboardDLSPruning;
 	protected Node startNodeDLSPruning;
 
@@ -23,32 +23,36 @@ public class testTreeWorkerDLSWithPruning {
 		Move firstMove = new Move(3, Minimax.MAX);
 		jboardDLS = new JournaledBoard(6, 7, 4);
 		startNodeDLS = new Node(firstMove, null);
-		treeWorkerDLS = new TreeWorkerDLS(jboardDLS, startNodeDLS, new BasicHeuristicFunction(), new BasicUtilityFunction());
+		treeWorkerDLS = new TreeWorkerDLS(jboardDLS, startNodeDLS, new AnotherHeuristicFunction(), new BasicUtilityFunction());
 		
 		Move firstMove2 = new Move(3, Minimax.MAX);
 		jboardDLSPruning = new JournaledBoard(6, 7, 4);
 		startNodeDLSPruning = new Node(firstMove2, null);
-		treeWorkerDLSPruning = new TreeWorkerDLS(jboardDLSPruning, startNodeDLSPruning, new BasicHeuristicFunction(), new BasicUtilityFunction());
+		treeWorkerDLSPruning = new TreeWorkerDLSWithPruning(jboardDLSPruning, startNodeDLSPruning, new AnotherHeuristicFunction(), new BasicUtilityFunction());
 	}
 
 	@Test
 	public void test() {
 		long startTime = System.currentTimeMillis();
-		for (int i = 1; i < 6; i++)
+		for (int i = 1; i < 7; i++)
 			treeWorkerDLS.buildTree(startNodeDLS, i);
 		System.out.println("Elapsed time: " + (System.currentTimeMillis() - startTime));
 		System.out.flush();
 		
 		startTime = System.currentTimeMillis();
-		for (int i = 1; i < 6; i++)
+		for (int i = 1; i < 10; i++)
 			treeWorkerDLSPruning.buildTree(startNodeDLSPruning, i);
 		System.out.println("Elapsed time: " + (System.currentTimeMillis() - startTime));
 		System.out.flush();
 		
-		Tree tree1 = new Tree(startNodeDLS);
+		// Uncomment to print the trees
+		/*Tree tree1 = new Tree(startNodeDLS);
 		Tree tree2 = new Tree(startNodeDLSPruning);
 		
-		assertEquals(tree1.getBestMove(), tree2.getBestMove());
+		System.out.println(tree1.headNode.stringifyGraph());
+		System.out.println("---------------------------------");
+		System.out.println(tree2.headNode.stringifyGraph());		
+		assertEquals(tree1.getBestMove(), tree2.getBestMove());*/
 	}
 
 }

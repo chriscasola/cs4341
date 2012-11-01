@@ -40,7 +40,7 @@ public class SearchManager {
 	 */
 	public void searchToDepth(int depth) {
 		if (depth > currentDepth) {
-			TreeWorkerIDDFS mainWorker = new TreeWorkerIDDFS(jboard.duplicate(), tree.getHead(), depth, currentDepth, new BasicHeuristicFunction(), new BasicUtilityFunction());
+			TreeWorkerIDDFS mainWorker = new TreeWorkerIDDFS(jboard.duplicate(), tree.getHead(), depth, currentDepth, new AnotherHeuristicFunction(), new BasicUtilityFunction());
 			mainWorker.run();
 			currentDepth = depth;
 		}

@@ -133,7 +133,7 @@ public class Node {
 			}
 		}
 		
-		throw new RuntimeException("No child node exists with the given column number.");
+		throw new RuntimeException("No child node exists with the given column number: " + colNum);
 	}
 	
 	/**
@@ -179,5 +179,9 @@ public class Node {
 	 */
 	public float getUtility() {
 		return utility;
+	}
+	
+	public void clearChildren() {
+		this.children = new ArrayList<Node>();
 	}
 }
