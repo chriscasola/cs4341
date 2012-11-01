@@ -2,7 +2,26 @@
 Chris Casola
 Jennifer Page
 
-##Heuristic Functions
+
+## What works
+
+We have successfully implemented iterative deepening depth first search and this is shown
+by our test cases (in the test folder). Alpha-beta pruning is also working, which can be seen
+by printing out an unpruned tree and a pruned tree and comparing the result. 
+
+## Problems
+
+Where problems have arisen is in Minimax. Before we added a heuristic function, we were using only
+the UtilityFunction and building small trees all the way to end states. With this our minimax
+algorithm worked. However, when we began using a Heuristic function at non-goal nodes, some kind of
+bug became apparent where all of the Heuristic utility values are wiped out of our graph and replaced
+with UtilityFunction values. We were not able to determine the cause in time.
+
+With certain size grids and moves, our JournaledBoard, which keeps track of game state in the search tree,
+loses synchronization with the actual tree. This causes the program to crash with certain inputs because
+the board is not being rolled back correctly as we move up the search tree. 
+
+## Heuristic Functions
 
 We designed two heuristic functions for our Project. The first one, AdvancedHeuristicFunction, subtracted 
 the number of partial connection sequences for the opponent from the number of partial connection sequences 
