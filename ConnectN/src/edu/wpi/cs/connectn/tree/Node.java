@@ -133,7 +133,7 @@ public class Node {
 			}
 		}
 		
-		throw new RuntimeException("No child node exists with the given column number.");
+		throw new RuntimeException("No child node exists with the given column number: " + colNum);
 	}
 	
 	/**

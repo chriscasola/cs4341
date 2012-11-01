@@ -105,7 +105,7 @@ public class TreeWorkerDLSWithPruning extends Thread {
 				}
 				
 				if (startNode.getParent() != null) {
-					if ((startNode.getMove().getOwner() == Minimax.MAX) && (startNode.getUtility() > startNode.getParent().getUtility())) {
+					if ((startNode.getMove().getOwner() == Minimax.MIN) && (startNode.getUtility() < startNode.getParent().getUtility())) {
 						startNode.clearChildren();
 						break;
 					}
