@@ -41,6 +41,16 @@ public class Bag {
 		items.add(item);
 	}
 	
+	public void removeItem(Item item) {
+		Iterator<Item> itemIterator = items.iterator();
+		while (itemIterator.hasNext()) {
+			if (itemIterator.next() == item) {
+				itemIterator.remove();
+				return;
+			}
+		}
+	}
+	
 	/**
 	 * Getter for the Bag's id.
 	 * 
