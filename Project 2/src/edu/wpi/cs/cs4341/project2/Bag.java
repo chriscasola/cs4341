@@ -125,4 +125,39 @@ public class Bag {
 		
 		return returnValue;
 	}
+	
+	/**
+	 * Returns a new Bag created from the given String.
+	 * 
+	 * @param bagString		The String to build a Bag from.
+	 * 
+	 * @return	An Bag created using the information from the given String.
+	 */
+	public static Bag fromString(String bagString) {
+		String[] parameters = bagString.split("|");
+		
+		// Ensure there are only two parameters in the String
+		if (parameters.length < 1) {
+			throw new RuntimeException("The given String contains too few parameters.");
+		}
+		
+		String[] bagParameters = parameters[0].split(" ");
+		
+		// Ensure there are only two parameters in the String
+		if (bagParameters.length != 2) {
+			throw new RuntimeException("The given String must only contain two parameters.");
+		}
+		// Ensure the first parameter is 1 character long
+		else if (bagParameters[0].length() != 1) {
+			throw new RuntimeException("The first parameter contained in the given String must only be one character long.");
+		}
+		
+		char id = bagParameters[0].charAt(0);
+		int weightCapacity = Integer.parseInt(parameters[1]);
+		
+		// TODO Process Item parameters
+		
+		return new Bag(id, weightCapacity);
+		}
+	}
 }
