@@ -158,6 +158,5 @@ public class Bag {
 		// TODO Process Item parameters
 		
 		return new Bag(id, weightCapacity);
-		}
 	}
 }
