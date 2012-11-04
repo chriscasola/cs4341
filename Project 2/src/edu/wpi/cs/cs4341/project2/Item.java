@@ -19,7 +19,7 @@ public class Item {
 	 */
 	public Item(char id, int weight) {
 		if (id < 65 || id > 90) {
-			throw new RuntimeException("The first parameter contained in the given String must be an uppercase letter.");
+			throw new RuntimeException("The id must be an uppercase letter.");
 		}
 		
 		this.id = id;
