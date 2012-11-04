@@ -98,7 +98,7 @@ public class Item {
 		
 		// Ensure there are only two parameters in the String
 		if (parameters.length != 2) {
-			throw new RuntimeException("The given String contains too many parameters.");
+			throw new RuntimeException("The given String must only contain two parameters.");
 		}
 		// Ensure the first parameter is 1 character long
 		else if (parameters[0].length() != 1) {
