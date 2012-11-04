@@ -12,7 +12,7 @@ public class Bag {
 	protected final char id;
 	
 	/** The weight capacity of the Bag. */
-	protected final int weight;
+	protected final int weightCapacity;
 	
 	/** A list of Items in the bag. */
 	protected List<Item> items;
@@ -20,15 +20,16 @@ public class Bag {
 	/**
 	 * Constructs a new empty Bag.
 	 * 
-	 * @param id	A lowercase letter that represents the Bag.
+	 * @param id				A lowercase letter that represents the Bag.
+	 * @param weightCapacity	The maximum weightCapacity of the Bag.
 	 */
-	public Bag(char id, int weight) {
+	public Bag(char id, int weightCapacity) {
 		if (id < 97 || id > 122) {
 			throw new RuntimeException("The id be an lowercase letter.");
 		}
 		
 		this.id = id;
-		this.weight = weight;
+		this.weightCapacity = weightCapacity;
 		items = new ArrayList<Item>();
 	}
 	
@@ -64,8 +65,8 @@ public class Bag {
 	 * 
 	 * @return The weight capacity of the Bag.
 	 */
-	public int getWeight() {
-		return weight;
+	public int getWeightCapacity() {
+		return weightCapacity;
 	}
 	
 	/**
@@ -107,22 +108,20 @@ public class Bag {
 	 */
 	@Override
 	public String toString() {
-		String returnValue = "{" + this.getClass().getName() + ":{id:" + id + ",items:[";
+		String returnValue = id + " " + weightCapacity;
 		
 		// Iterate over items
 		Iterator<Item> iItems = items.iterator();
 		
 		// Add first Item to the return value
 		if (iItems.hasNext()) {
-			returnValue += iItems.next().toString();
+			returnValue += "|" + iItems.next().toString();
 		}
 		
 		// Add the rest of the Items to the return value
 		while (iItems.hasNext()) {
-			returnValue += "," + iItems.next().toString();
+			returnValue += "|" + iItems.next().toString();
 		}
-		
-		returnValue += "]}}";
 		
 		return returnValue;
 	}
