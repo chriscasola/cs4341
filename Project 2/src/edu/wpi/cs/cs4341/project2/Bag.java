@@ -14,9 +14,6 @@ public class Bag {
 	/** The weight capacity of the Bag. */
 	protected final int weightCapacity;
 	
-	/** A list of Items in the bag. */
-	protected List<Item> items;
-	
 	/**
 	 * Constructs a new empty Bag.
 	 * 
@@ -30,26 +27,6 @@ public class Bag {
 		
 		this.id = id;
 		this.weightCapacity = weightCapacity;
-		items = new ArrayList<Item>();
-	}
-	
-	/**
-	 * Adds the given Item to the Bag.
-	 * 
-	 * @param item	The Item to add to the Bag.
-	 */
-	public void addItem(Item item) {
-		items.add(item);
-	}
-	
-	public void removeItem(Item item) {
-		Iterator<Item> itemIterator = items.iterator();
-		while (itemIterator.hasNext()) {
-			if (itemIterator.next() == item) {
-				itemIterator.remove();
-				return;
-			}
-		}
 	}
 	
 	/**
@@ -59,15 +36,6 @@ public class Bag {
 	 */
 	public char getId() {
 		return id;
-	}
-	
-	/**
-	 * Getter for the Items in the Bag.
-	 * 
-	 * @return Returns a List of Items that are in the Bag.
-	 */
-	public List<Item> getItems() {
-		return items;
 	}
 	
 	/**
