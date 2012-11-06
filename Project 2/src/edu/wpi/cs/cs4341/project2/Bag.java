@@ -88,19 +88,6 @@ public class Bag {
 	public String toString() {
 		String returnValue = id + " " + weightCapacity;
 		
-		// Iterate over items
-		Iterator<Item> iItems = items.iterator();
-		
-		// Add first Item to the return value
-		if (iItems.hasNext()) {
-			returnValue += "|" + iItems.next().toString();
-		}
-		
-		// Add the rest of the Items to the return value
-		while (iItems.hasNext()) {
-			returnValue += "|" + iItems.next().toString();
-		}
-		
 		return returnValue;
 	}
 	
@@ -112,14 +99,8 @@ public class Bag {
 	 * @return	An Bag created using the information from the given String.
 	 */
 	public static Bag fromString(String bagString) {
-		String[] parameters = bagString.split("|");
 		
-		// Ensure there are only two parameters in the String
-		if (parameters.length < 1) {
-			throw new RuntimeException("The given String contains too few parameters.");
-		}
-		
-		String[] bagParameters = parameters[0].split(" ");
+		String[] bagParameters = bagString.split(" ");
 		
 		// Ensure there are only two parameters in the String
 		if (bagParameters.length != 2) {
@@ -131,9 +112,7 @@ public class Bag {
 		}
 		
 		char id = bagParameters[0].charAt(0);
-		int weightCapacity = Integer.parseInt(parameters[1]);
-		
-		// TODO Process Item parameters
+		int weightCapacity = Integer.parseInt(bagParameters[1]);
 		
 		return new Bag(id, weightCapacity);
 	}
