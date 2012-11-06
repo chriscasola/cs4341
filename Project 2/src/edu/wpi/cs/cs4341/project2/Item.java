@@ -11,6 +11,9 @@ public class Item {
 	/** The weight of the item. */
 	protected final int weight;
 	
+	/** The bag that the item is assigned to. */
+	protected Bag assignedBag;
+	
 	/**
 	 * Constructs an Item.
 	 * 
@@ -24,6 +27,15 @@ public class Item {
 		
 		this.id = id;
 		this.weight = weight;
+	}
+	
+	/**
+	 * Getter for the assignedBag.
+	 * 
+	 * @return	The currently assignedBag.
+	 */
+	public Bag getAssignedBag() {
+		return assignedBag;
 	}
 	
 	/**
@@ -42,6 +54,18 @@ public class Item {
 	 */
 	public int getWeight() {
 		return weight;
+	}
+	
+	/**
+	 * Assigns a Bag to this Item.
+	 * 
+	 * @param bag	The Bag to assign to this Item.
+	 */
+	public void setAssignedBag(Bag bag) {
+		if (assignedBag != null) {
+			throw new RuntimeException("Attempt to overwrite bag assignment detected.");
+		}
+		assignedBag = bag;
 	}
 	
 	/**
@@ -91,7 +115,7 @@ public class Item {
 	 * 
 	 * @param itemString	The String to build an Item from.
 	 * 
-	 * @return	An Item created using .
+	 * @return	An Item created using the given String.
 	 */
 	public static Item fromString(String itemString) {
 		String[] parameters = itemString.split(" ");
