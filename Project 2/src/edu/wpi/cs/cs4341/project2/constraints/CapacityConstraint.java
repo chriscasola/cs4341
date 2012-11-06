@@ -1,6 +1,6 @@
 package edu.wpi.cs.cs4341.project2.constraints;
 //TODO
-public class CapacityConstraint extends Constraint {
+public class CapacityConstraint implements Constraint {
 	protected final int minimum;
 	protected final int maximum;
 	

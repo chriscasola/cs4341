@@ -2,7 +2,7 @@ package edu.wpi.cs.cs4341.project2.constraints;
 
 import edu.wpi.cs.cs4341.project2.Item;
 
-public abstract class BinaryConstraint extends Constraint {
+public abstract class BinaryConstraint implements Constraint {
 	protected Item[] items;
 	
 	public BinaryConstraint(Item item1, Item item2) {

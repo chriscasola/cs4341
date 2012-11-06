@@ -9,7 +9,7 @@ import edu.wpi.cs.cs4341.project2.Item;
 /**
  * An abstract class that represents a unary constraint.
  */
-public abstract class UnaryConstraint extends Constraint {
+public abstract class UnaryConstraint implements Constraint {
 	protected final Item item;
 	protected List<Bag> bags;
 	
