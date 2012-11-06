@@ -9,4 +9,10 @@ public class CapacityConstraint implements Constraint {
 		this.minimum = minimum;
 		this.maximum = maximum;
 	}
+
+	@Override
+	public boolean satisfied() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

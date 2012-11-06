@@ -10,4 +10,10 @@ public class EqualBinaryConstraint extends BinaryConstraint {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public boolean satisfied() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -10,4 +10,10 @@ public class ExclusiveUnaryConstraint extends UnaryConstraint {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public boolean satisfied() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
