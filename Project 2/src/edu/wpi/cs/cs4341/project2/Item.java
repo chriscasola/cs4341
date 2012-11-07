@@ -87,7 +87,7 @@ public class Item {
 			Item item = (Item) object;
 			
 			// check that the values of the toString function are equal
-			if (this.toString().equals(item.toString())) {
+			if (id == item.id && weight == item.weight) {
 				return true;
 			}
 			else {
