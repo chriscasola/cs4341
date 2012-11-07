@@ -62,7 +62,7 @@ public class Item {
 	 * @param bag	The Bag to assign to this Item.
 	 */
 	public void setAssignedBag(Bag bag) {
-		if (assignedBag != null) {
+		if (assignedBag != null && bag != null) {
 			throw new RuntimeException("Attempt to overwrite bag assignment detected.");
 		}
 		assignedBag = bag;
