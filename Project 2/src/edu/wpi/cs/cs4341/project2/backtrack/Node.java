@@ -38,12 +38,20 @@ public class Node {
 	}
 	
 	/**
+	 * Adds a child node
+	 * @param node the child node to add
+	 */
+	public void addChild(Node node) {
+		this.children.add(node);
+	}
+	
+	/**
 	 * Places item in bag. Assignment will only occur once.
 	 * @return true, if the assignment was successfully, false otherwise
 	 */
 	public void apply() {
 		if (applied == false) {
-			bag.addItem(item);
+			item.setAssignedBag(bag);
 			applied = true;
 		}
 	}
@@ -51,9 +59,10 @@ public class Node {
 	/**
 	 * Reverts the assignment
 	 */
-	public void revert() {
-		bag.removeItem(item);
+	public Item revert() {
+		item.setAssignedBag(null);
 		applied = false;
+		return item;
 	}
 	
 	/**
