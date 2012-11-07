@@ -61,8 +61,8 @@ public class Bag {
 		if (object instanceof Item) {
 			Bag bag = (Bag) object;
 			
-			// check that the values of the toString function are equal
-			if (id == bag.getId()) {
+			// check that the values of the bags are equal
+			if (id == bag.getId() && weightCapacity == bag.getWeightCapacity()) {
 				return true;
 			}
 			else {
