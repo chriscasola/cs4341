@@ -20,6 +20,18 @@ public class WeightConstraint implements Constraint {
 	 * @param items a list of all the items in the problem
 	 */
 	public WeightConstraint(Bag bag, Item[] items) {
+		if (bag == null) {
+			throw new NullPointerException("The parameter bag must not be null.");
+		}
+		if (items == null) {
+			throw new NullPointerException("The parameter items must not be null.");
+		}
+		for (int i = 0; i < items.length; i++) {
+			if (items[i] == null) {
+				throw new NullPointerException("The parameter items is null at index " + i + ".");
+			}
+		}
+		
 		this.bag = bag;
 		this.items = items;
 	}

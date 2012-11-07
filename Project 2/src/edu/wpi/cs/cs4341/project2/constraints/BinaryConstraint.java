@@ -16,6 +16,13 @@ public abstract class BinaryConstraint implements Constraint {
 	 * @param item2		Another item involved with this constraint.
 	 */
 	public BinaryConstraint(Item item1, Item item2) {
+		if (item1 == null) {
+			throw new NullPointerException("The parameter item1 must not be null.");
+		}
+		if (item2 == null) {
+			throw new NullPointerException("The parameter item2 must not be null.");
+		}
+		
 		this.item1 = item1;
 		this.item2 = item2;
 	}

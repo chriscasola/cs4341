@@ -21,7 +21,6 @@ public class TestWeightConstraint {
 	public void setUp() throws Exception {
 		bag = new Bag('a', 10);
 		items = new Item[5];
-		weightConstraint = new WeightConstraint(bag, items);
 	}
 
 	@Test
@@ -38,6 +37,9 @@ public class TestWeightConstraint {
 		items[2] = item3;
 		items[3] = item4;
 		items[4] = item5;
+		
+
+		weightConstraint = new WeightConstraint(bag, items);
 		
 		// Ensure the constaint is none (there are not items in the bag)
 		assertTrue(weightConstraint.satisfied() == Satisfaction.NONE);
