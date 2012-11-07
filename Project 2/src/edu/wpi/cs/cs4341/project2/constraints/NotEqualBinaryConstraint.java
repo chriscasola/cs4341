@@ -11,9 +11,9 @@ public class NotEqualBinaryConstraint extends BinaryConstraint {
 	}
 
 	@Override
-	public boolean satisfied() {
+	public Satisfaction satisfied() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }
