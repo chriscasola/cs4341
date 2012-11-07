@@ -34,8 +34,12 @@ public class ExclusiveUnaryConstraint extends UnaryConstraint {
 	 * @param exclusiveUnaryConstraintString	The String to build a ExclusiveUnaryConstraint from.
 	 * @param items								An array of all Items in the Constraint Satisfaction 
 	 * 											Problem. This array will be searched to find Items which 
-	 * 											have the same id as those specified in the given 
-	 * 											equalBinaryConstraintString.
+	 * 											have the same id as the one specified in the given 
+	 * 											exclusiveUnaryConstraintString.
+	 * @param bags								An array of all Bags in the Constraint Satisfaction Problem. 
+	 * 											This array will be searched to find Bags which have the same 
+	 * 											id as the one specified in the given 
+	 * 											exclusiveUnaryConstraintString.
 	 * 
 	 * @return	A ExclusiveUnaryConstraint created using the given String.
 	 */
