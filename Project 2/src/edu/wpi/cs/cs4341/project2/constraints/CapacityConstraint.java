@@ -74,7 +74,7 @@ public class CapacityConstraint implements Constraint {
 	 * @param bag						The Bag that this CapacityConstraint is for.
 	 * @param items						An array of all Items in the Constraint Satisfaction Problem.
 	 * 
-	 * @return	An Item created using the given String.
+	 * @return	A CapacityConstraint created using the given String.
 	 */
 	public static CapacityConstraint fromString(String capacityConstraintString, Bag bag, Item[] items) {
 		String[] parameters = capacityConstraintString.split(" ");
