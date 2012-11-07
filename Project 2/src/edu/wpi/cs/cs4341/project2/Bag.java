@@ -58,7 +58,7 @@ public class Bag {
 		}
 		
 		// if the Object is and instance of Bag
-		if (object instanceof Item) {
+		if (object instanceof Bag) {
 			Bag bag = (Bag) object;
 			
 			// check that the values of the bags are equal
