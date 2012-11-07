@@ -62,7 +62,7 @@ public class Bag {
 			Bag bag = (Bag) object;
 			
 			// check that the values of the toString function are equal
-			if (this.toString().equals(bag.toString())) {
+			if (id == bag.getId()) {
 				return true;
 			}
 			else {
