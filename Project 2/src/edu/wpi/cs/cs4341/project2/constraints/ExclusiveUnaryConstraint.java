@@ -9,7 +9,7 @@ import edu.wpi.cs.cs4341.project2.Item;
 public class ExclusiveUnaryConstraint extends UnaryConstraint {
 
 	/**
-	 * Constructs a new ExclusiveUnaryConstraint
+	 * Constructs a new ExclusiveUnaryConstraint.
 	 * 
 	 * @param item	The Item to constrain.
 	 * @param bags	The Bags that this item may not be in.
