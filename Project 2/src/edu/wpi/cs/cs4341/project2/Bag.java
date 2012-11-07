@@ -1,9 +1,5 @@
 package edu.wpi.cs.cs4341.project2;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Represents a Bag.
  */

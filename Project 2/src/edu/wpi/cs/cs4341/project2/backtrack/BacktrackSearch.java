@@ -1,11 +1,11 @@
 package edu.wpi.cs.cs4341.project2.backtrack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint;
+import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
 
 public class BacktrackSearch {
 	
@@ -24,9 +24,9 @@ public class BacktrackSearch {
 	/**
 	 * Constructs a new BacktrackSearch
 	 */
-	public BacktrackSearch() {
-		this.items = new ArrayList<Item>();
-		this.constraints = new ArrayList<Constraint>();
+	public BacktrackSearch(List<Item> items, List<Constraint> constraints) {
+		this.items = items;
+		this.constraints = constraints;
 		this.headNode = new Node(null, null, null);
 	}
 	
@@ -37,7 +37,12 @@ public class BacktrackSearch {
 	 */
 	protected boolean BackTrack(Node startNode) {
 		if (items.size() == 0) {
-			return true;
+			if (verifyConstraintsComplete()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		Item currItem = selectUnassignedItem();
 		for (Bag bag : bags) {
@@ -61,7 +66,20 @@ public class BacktrackSearch {
 	 */
 	protected boolean verifyConstraints() {
 		for (Constraint constraint : constraints) {
-			if (!(constraint.satisfied())) {
+			if (constraint.satisfied() == Satisfaction.BROKEN) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Verifies that all constraints are COMPLETE
+	 * @return true if all constraints are COMPLETE, otherwise false
+	 */
+	protected boolean verifyConstraintsComplete() {
+		for (Constraint constraint : constraints) {
+			if (constraint.satisfied() != Satisfaction.COMPLETE) {
 				return false;
 			}
 		}
@@ -73,6 +91,6 @@ public class BacktrackSearch {
 	 * @return an item that is not in a bag
 	 */
 	protected Item selectUnassignedItem() {
-		return items.get(0);
+		return items.remove(0);
 	}
 }
