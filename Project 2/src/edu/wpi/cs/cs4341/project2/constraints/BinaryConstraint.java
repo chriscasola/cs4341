@@ -6,7 +6,8 @@ import edu.wpi.cs.cs4341.project2.Item;
  * Represents a BinaryConstraint.
  */
 public abstract class BinaryConstraint implements Constraint {
-	protected Item[] items;
+	protected Item item1;
+	protected Item item2;
 	
 	/**
 	 * Constructs a new BinaryConstraint.
@@ -15,17 +16,7 @@ public abstract class BinaryConstraint implements Constraint {
 	 * @param item2		Another item involved with this constraint.
 	 */
 	public BinaryConstraint(Item item1, Item item2) {
-		items = new Item[2];
-		items[0] = item1;
-		items[1] = item2;
-	}
-	
-	/**
-	 * Returns the Items involved in this constraint.
-	 * 
-	 * @return An array of Items involved in this constraint.
-	 */
-	public Item[] getItems() {
-		return items;
+		this.item1 = item1;
+		this.item2 = item2;
 	}
 }
