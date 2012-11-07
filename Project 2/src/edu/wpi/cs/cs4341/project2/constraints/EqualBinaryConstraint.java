@@ -49,13 +49,13 @@ public class EqualBinaryConstraint extends BinaryConstraint {
 		if (parameters.length != 2) {
 			throw new RuntimeException("The given String must only contain two parameters.");
 		}
-		// Ensure the first parameter is at least 1 character long
-		else if (parameters[0].length() == 1) {
-			throw new RuntimeException("The first parameter contained in the given String must be only one character long.");
+		// Ensure the first parameter is exactly 1 character long
+		else if (parameters[0].length() != 1) {
+			throw new RuntimeException("The first parameter contained in the given String must be exactly one character long.");
 		}
-		// Ensure the second parameter is at least 1 character long
-		else if (parameters[1].length() == 1) {
-			throw new RuntimeException("The second parameter contained in the given String must be only one character long.");
+		// Ensure the second parameter is exactly 1 character long
+		else if (parameters[1].length() != 1) {
+			throw new RuntimeException("The second parameter contained in the given String must be exactly one character long.");
 		}
 		else {
 			Item item1 = null;
