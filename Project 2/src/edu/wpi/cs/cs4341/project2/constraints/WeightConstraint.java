@@ -1,7 +1,5 @@
 package edu.wpi.cs.cs4341.project2.constraints;
 
-import java.util.List;
-
 import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
 
@@ -14,14 +12,14 @@ public class WeightConstraint implements Constraint {
 	protected Bag bag;
 	
 	/** The list of all items in this problem */
-	protected List<Item> items;
+	protected Item[] items;
 	
 	/**
 	 * Constructs a new WeightConstraint for the given bag
 	 * @param bag the bag to constrain
 	 * @param items a list of all the items in the problem
 	 */
-	public WeightConstraint(Bag bag, List<Item> items) {
+	public WeightConstraint(Bag bag, Item[] items) {
 		this.bag = bag;
 		this.items = items;
 	}
@@ -32,21 +30,21 @@ public class WeightConstraint implements Constraint {
 	@Override
 	public Satisfaction satisfied() {
 		int weight = 0;
-		for (Item item : items) {
-			if (item.getAssignedBag() == bag) {
-				weight += item.getWeight();
+		for (int i = 0; i < items.length; i++) {
+			if (items[i].getAssignedBag() == bag) {
+				weight += items[i].getWeight();
 			}
 		}
 		
 		float capacity = (weight * 1f) / bag.getWeightCapacity();
 		
-		if (capacity == 0) { // The bag is empty
+		if (capacity == 0f) { // The bag is empty
 			return Satisfaction.NONE;
 		}
-		else if (capacity < .9) { // The bag is less than 90% full
+		else if (capacity < .9f) { // The bag is less than 90% full
 			return Satisfaction.PARTIAL;
 		}
-		else if (capacity <= 1) { // The bag is between 90% and 100% full, inclusive
+		else if (capacity <= 1f) { // The bag is between 90% and 100% full, inclusive
 			return Satisfaction.COMPLETE;
 		}
 		else { // The bag is more than 100% full
