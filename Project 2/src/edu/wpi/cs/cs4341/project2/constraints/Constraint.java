@@ -5,7 +5,7 @@ package edu.wpi.cs.cs4341.project2.constraints;
  */
 public interface Constraint {
 	public enum Satisfaction {
-		COMPLETE, PARTIAL, NONE, BREAK
+		COMPLETE, PARTIAL, NONE, BROKEN
 	}
 	
 	/**
