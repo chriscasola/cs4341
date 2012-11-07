@@ -9,7 +9,7 @@ import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
 
-public class testExclusiveUnaryConstraint {
+public class TestExclusiveUnaryConstraint {
 
 	protected Bag[] bags;
 	protected Bag bag1;
