@@ -38,22 +38,23 @@ public class Project2 {
 		ArrayList<Constraint> constraintList = new ArrayList<Constraint>();
 		Item[] items = null;
 		Bag[] bags = null;
-		Constraint[] constraints;
+		Constraint[] constraints = null;
 		
 		try {
 			while ((line = reader.readLine()) != null) {
 				if (line.substring(0, 5).equals("#####")) {
 					section++;
 					
-					if (section == 1) {
+					// After processing variables (Items) section, get items array.
+					if (section == 2) {
 						items = (Item[]) itemsList.toArray();
 						itemsList = null;
 					}
-					else if (section == 2) {
+					// After processing values (Bags) section, get bags array and build WeightConstraints.
+					else if (section == 3) {
 						bags = (Bag[]) bagsList.toArray();
 						bagsList = null;
-					}
-					else if (section == 3) {
+						
 						// TODO WeightConstraints
 					}
 				}
