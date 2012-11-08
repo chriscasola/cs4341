@@ -11,7 +11,7 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
 import edu.wpi.cs.cs4341.project2.constraints.WeightConstraint;
 
 
-public class testWeightConstraint {
+public class TestWeightConstraint {
 	
 	protected WeightConstraint weightConstraint;
 	protected Item[] items;

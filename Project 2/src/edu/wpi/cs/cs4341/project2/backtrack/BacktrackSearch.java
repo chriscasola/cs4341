@@ -1,5 +1,6 @@
 package edu.wpi.cs.cs4341.project2.backtrack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.cs.cs4341.project2.Bag;
@@ -8,28 +9,48 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
 
 public class BacktrackSearch {
-	
+
 	/** List of items to be assigned */
 	protected List<Item> items;
-	
+
 	/** List of bags to put items in */
 	protected List<Bag> bags;
-	
+
 	/** List of constraints to be met */
 	protected List<Constraint> constraints;
-	
+
 	/** The head node of the search */
 	protected Node headNode;
-	
+
 	/**
 	 * Constructs a new BacktrackSearch
 	 */
-	public BacktrackSearch(List<Item> items, List<Constraint> constraints) {
-		this.items = items;
+	public BacktrackSearch(List<Item> items, List<Bag> bags, List<Constraint> constraints) {
+		this.items = new ArrayList<Item>();
+		this.bags = bags;
 		this.constraints = constraints;
 		this.headNode = new Node(null, null, null);
+
+		// Create a copy of the items List
+		for (Item item : items) {
+			this.items.add(item);
+		}
 	}
-	
+
+	/**
+	 * Runs the backtrack search
+	 * @return true if a solution is found, false otherwise
+	 */
+	public boolean run() {		
+		if (BackTrack(headNode)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	/**
 	 * Performs the Backtrack search
 	 * @param startNode the node to start at
@@ -59,7 +80,7 @@ public class BacktrackSearch {
 		}
 		return false; // failure
 	}
-	
+
 	/**
 	 * Verifies that no constraints are violated
 	 * @return false if any constraints are violated, otherwise true
@@ -72,7 +93,7 @@ public class BacktrackSearch {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Verifies that all constraints are COMPLETE
 	 * @return true if all constraints are COMPLETE, otherwise false
@@ -85,7 +106,7 @@ public class BacktrackSearch {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Returns an item that is not in a bag
 	 * @return an item that is not in a bag
