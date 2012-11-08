@@ -1,6 +1,8 @@
 package edu.wpi.cs.cs4341.project2.backtrack;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.wpi.cs.cs4341.project2.Bag;
@@ -12,16 +14,23 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
  * Adds the minimum remaining values and degree heuristics to
  * backtrack search.
  */
-public class BacktrackSearchHeuristics extends BacktrackSearch {
+public class BacktrackSearchHeuristic extends BacktrackSearch {
 
-	public BacktrackSearchHeuristics(List<Item> items, List<Bag> bags, List<Constraint> constraints) {
+	public BacktrackSearchHeuristic(List<Item> items, List<Bag> bags, List<Constraint> constraints) {
 		super(items, bags, constraints);
 	}
 	
 	@Override
 	protected void orderBags() {
-		
+		Collections.sort(items, new Comparator<Item>() {
+			@Override
+			public int compare(Item o1, Item o2) {
+				// TODO implement this comparator to sort bags by order of least constraining
+				return 0;
+			}
+		});
 	}
+	
 	
 	@Override
 	protected Item selectUnassignedItem() {
@@ -31,7 +40,14 @@ public class BacktrackSearchHeuristics extends BacktrackSearch {
 		
 		for (int i = 1; i < items.size(); i++) {
 			currNumBags = getNumPossibleBags(items.get(i));
-			if (currNumBags < bestNumBags) {
+			if (currNumBags == bestNumBags) {
+				// use degree heuristic if necessary
+				if (getConstraints(bestItem) < getConstraints(items.get(i))) {
+					bestNumBags = currNumBags;
+					bestItem = items.get(i);
+				}
+			}
+			else if (currNumBags < bestNumBags) {
 				bestNumBags = currNumBags;
 				bestItem = items.get(i);
 			}
@@ -74,5 +90,21 @@ public class BacktrackSearchHeuristics extends BacktrackSearch {
 			}
 		}
 		return retVal;
+	}
+	
+	/**
+	 * Returns the number of constraints the given item is involved in
+	 * @param item the item to check
+	 * @return the number of constraints the given item is involved in
+	 */
+	protected int getConstraints(Item item) {
+		int numConstraints = 0;
+		
+		for (Constraint constraint : constraints) {
+			if (constraint.hasItem(item)) {
+				numConstraints++;
+			}
+		}
+		return numConstraints;
 	}
 }
