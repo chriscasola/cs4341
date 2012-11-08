@@ -27,7 +27,7 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 		Collections.sort(items, new Comparator<Item>() {
 			@Override
 			public int compare(Item o1, Item o2) {
-				// TODO implement this comparator to sort bags by order of least constraining
+				// TODO implement this comparator to sort bags by order of least constraining value
 				return 0;
 			}
 		});
