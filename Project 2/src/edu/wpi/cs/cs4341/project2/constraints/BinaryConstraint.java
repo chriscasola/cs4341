@@ -28,6 +28,13 @@ public abstract class BinaryConstraint implements Constraint {
 		this.item2 = item2;
 	}
 	
+	/**
+	 * @return an array containing the items involved in this constraint
+	 */
+	public Item[] getItems() {
+		return new Item[]{item1, item2};
+	}
+	
 	@Override
 	public boolean hasItem(Item item) {
 		if (item1 == item || item2 == item) {

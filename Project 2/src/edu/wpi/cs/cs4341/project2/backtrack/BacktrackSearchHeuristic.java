@@ -3,10 +3,12 @@ package edu.wpi.cs.cs4341.project2.backtrack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
+import edu.wpi.cs.cs4341.project2.constraints.BinaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
 
@@ -106,5 +108,29 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 			}
 		}
 		return numConstraints;
+	}
+	
+	/**
+	 * Returns a hashmap containing constraint item pairs that lead away
+	 * from the given node in the constraint graph.
+	 * @param item the item to evaluate
+	 * @return a hashmap containing constraint item pairs that lead away
+	 * from the given node in the constraint graph.
+	 */
+	protected HashMap<Constraint, Item> getConstGraphNeighbors(Item item) {
+		HashMap<Constraint, Item> retVal = new HashMap<Constraint, Item>();
+		Item[] constItems;
+		for (Constraint constraint : constraints) {
+			if (constraint instanceof BinaryConstraint) {
+				constItems = ((BinaryConstraint) constraint).getItems();
+				if (constItems[0] == item) {
+					retVal.put(constraint, constItems[1]);
+				}
+				else if (constItems[1] == item) {
+					retVal.put(constraint, constItems[0]);
+				}
+			}
+		}
+		return retVal;
 	}
 }
