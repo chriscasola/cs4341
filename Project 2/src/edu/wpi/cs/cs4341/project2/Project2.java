@@ -44,23 +44,27 @@ public class Project2 {
 		
 		try {
 			while ((line = reader.readLine()) != null) {
-				if (line.substring(0, 5).equals("#####")) {
+				if (line.length() >= 5 && line.substring(0, 5).equals("#####")) {
 					section++;
 					
 					// After processing variables (Items) section, get items array.
 					if (section == 2) {
-						items = (Item[]) itemsList.toArray();
+						items = new Item[itemsList.size()];
+						itemsList.toArray(items);
 						itemsList = null;
 					}
 					// After processing values (Bags) section, get bags array and build WeightConstraints.
 					else if (section == 3) {
-						bags = (Bag[]) bagsList.toArray();
-						bagsList = null;
+						bags = new Bag[bagsList.size()];
+						bagsList.toArray(bags);
+						//bagsList = null;
 						
 						for (int i = 0; i < bags.length; i++) {
 							constraintList.add(new WeightConstraint(bags[i], items));
 						}
 					}
+					
+					continue;
 				}
 				
 				switch (section) {
@@ -97,7 +101,8 @@ public class Project2 {
 			return;
 		}
 		
-		constraints = (Constraint[]) constraintList.toArray();
+		constraints = new Constraint[constraintList.size()];
+		constraintList.toArray(constraints);
 		constraintList = null;
 	}
 }
