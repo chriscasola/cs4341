@@ -1,5 +1,7 @@
 package edu.wpi.cs.cs4341.project2.constraints;
 
+import edu.wpi.cs.cs4341.project2.Item;
+
 /**
  * An interface for constraints.
  */
@@ -14,4 +16,11 @@ public interface Constraint {
 	 * @return True if the constraint is satisfied, false otherwise.
 	 */
 	public Satisfaction satisfied();
+	
+	/**
+	 * Returns true if the item is involved in this constraint, otherwise false
+	 * @param item the item to check
+	 * @return true if the item is involved in this constraint, otherwise false
+	 */
+	public boolean hasItem(Item item);
 }
