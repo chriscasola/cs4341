@@ -12,6 +12,7 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.EqualBinaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.ExclusiveUnaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.InclusiveUnaryConstraint;
+import edu.wpi.cs.cs4341.project2.constraints.MutuallyExclusiveBinaryConstraint;
 
 public class Project2 {
 	public static void main(String[] args) {
@@ -82,7 +83,7 @@ public class Project2 {
 					case 7:	// TODO
 							break;
 					// mutual exclusive
-					case 8:	// TODO
+					case 8:	constraintList.add(MutuallyExclusiveBinaryConstraint.fromString(line, items, bags));
 							break;
 				}
 			}

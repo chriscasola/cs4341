@@ -65,5 +65,91 @@ public class MutuallyExclusiveBinaryConstraint extends BinaryConstraint {
 		
 		return Satisfaction.NONE;
 	}
+	
+	/**
+	 * Returns a new MutuallyExclusiveBinaryConstraint created from the given String.
+	 * 
+	 * @param mutuallyExclusiveBinaryConstraintString	The String to build a 
+	 * 													MutuallyExclusiveBinaryConstraint from.
+	 * @param items			An array of all Items in the Constraint Satisfaction Problem. This array will be 
+	 * 						searched to find Items which have the same id as the one specified in the given 
+	 * 						mutuallyExclusiveBinaryConstraintString.
+	 * @param bags			An array of all Bags in the Constraint Satisfaction Problem. This array will be 
+	 * 						searched to find Bags which have the same id as the one specified in the given 
+	 * 						mutuallyExclusiveBinaryConstraintString.
+	 * 
+	 * @return	A MutuallyExclusiveBinaryConstraint created using the given String.
+	 */
+	public static MutuallyExclusiveBinaryConstraint fromString(String mutuallyExclusiveBinaryConstraintString, Item[] items, Bag[] bags) {
+		String[] parameters = mutuallyExclusiveBinaryConstraintString.split(" ");
 
+		// Ensure there are at least two parameters in the String
+		if (parameters.length < 4) {
+			throw new RuntimeException("The given String must contain at least two parameters.");
+		}
+		// Ensure the first parameter is 1 character long
+		else if (parameters[0].length() != 1) {
+			throw new RuntimeException("The first parameter contained in the given String must be exactly one character long.");
+		}
+		// Ensure the second parameter is 1 character long
+		else if (parameters[1].length() != 1) {
+			throw new RuntimeException("The second parameter contained in the given String must be exactly one character long.");
+		}
+		// Ensure the third parameter is 1 character long
+		else if (parameters[2].length() != 1) {
+			throw new RuntimeException("The third parameter contained in the given String must be exactly one character long.");
+		}
+		// Ensure the fourth parameter is 1 character long
+		else if (parameters[3].length() != 1) {
+			throw new RuntimeException("The fourth parameter contained in the given String must be exactly one character long.");
+		}
+		else {
+			// Get item1 and item2
+			char item1Id = parameters[0].charAt(0);
+			char item2Id = parameters[1].charAt(0);
+			Item item1 = null;
+			Item item2 = null;
+			
+			for (int i = 0; i < items.length; i++) {
+				if (item1Id == items[i].getId()) {
+					item1 = items[i];
+				}
+				if (item2Id == items[i].getId()) {
+					item2 = items[i];
+				}
+			}
+			
+			if (item1 == null) {
+				throw new RuntimeException("Unable to find an Item with id " + item1Id + ".");
+			}
+			if (item2 == null) {
+				throw new RuntimeException("Unable to find an Item with id " + item2Id + ".");
+			}
+			
+			// get bag1 and bag2
+			char bag1Id = parameters[2].charAt(0);
+			char bag2Id = parameters[3].charAt(0);
+			Bag bag1 = null;
+			Bag bag2 = null;
+			
+			for (int i = 0; i < bags.length; i++) {
+				if (bag1Id == bags[i].getId()) {
+					bag1 = bags[i];
+				}
+				if (bag2Id == bags[i].getId()) {
+					bag2 = bags[i];
+				}
+			}
+			
+			if (bag1 == null) {
+				throw new RuntimeException("Unable to find an Item with id " + bag1Id + ".");
+			}
+			if (bag2 == null) {
+				throw new RuntimeException("Unable to find an Item with id " + bag2Id + ".");
+			}
+			
+			// Construct and return new MutuallyExclusiveBinaryConstraint
+			return new MutuallyExclusiveBinaryConstraint(item1, item2, bag1, bag2);
+		}
+	}
 }
