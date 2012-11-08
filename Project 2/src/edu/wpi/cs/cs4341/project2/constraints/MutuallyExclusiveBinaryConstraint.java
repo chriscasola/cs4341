@@ -93,9 +93,9 @@ public class MutuallyExclusiveBinaryConstraint extends BinaryConstraint {
 	public static MutuallyExclusiveBinaryConstraint fromString(String mutuallyExclusiveBinaryConstraintString, Item[] items, Bag[] bags) {
 		String[] parameters = mutuallyExclusiveBinaryConstraintString.split(" ");
 
-		// Ensure there are at least two parameters in the String
+		// Ensure there are at least four parameters in the String
 		if (parameters.length < 4) {
-			throw new RuntimeException("The given String must contain at least two parameters.");
+			throw new RuntimeException("The given String must contain at least four parameters.");
 		}
 		// Ensure the first parameter is 1 character long
 		else if (parameters[0].length() != 1) {
