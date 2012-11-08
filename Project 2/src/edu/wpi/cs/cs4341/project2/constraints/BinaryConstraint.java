@@ -30,7 +30,7 @@ public abstract class BinaryConstraint implements Constraint {
 	
 	@Override
 	public boolean hasItem(Item item) {
-		if (item1 == item || item2 == item) {
+		if (item1.equals(item) || item2.equals(item)) {
 			return true;
 		}
 		return false;

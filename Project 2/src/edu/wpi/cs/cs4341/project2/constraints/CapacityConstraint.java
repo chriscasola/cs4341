@@ -66,6 +66,24 @@ public class CapacityConstraint implements Constraint {
 			return Satisfaction.NONE;
 		}
 	}
+	
+	@Override
+	public boolean hasItem(Item item) {
+		for (int i = 0; i < items.length; i++) {
+			if (items[i].equals(item)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean hasBag(Bag bag) {
+		if (this.bag.equals(bag)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Returns a new CapacityConstraint created from the given String.
@@ -97,23 +115,5 @@ public class CapacityConstraint implements Constraint {
 
 			return new CapacityConstraint(minimum, maximum, bag, items);
 		}
-	}
-
-	@Override
-	public boolean hasItem(Item item) {
-		for (int i = 0; i < items.length; i++) {
-			if (items[i] == item) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean hasBag(Bag bag) {
-		if (this.bag == bag) {
-			return true;
-		}
-		return false;
 	}
 }
