@@ -14,6 +14,7 @@ import edu.wpi.cs.cs4341.project2.constraints.ExclusiveUnaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.InclusiveUnaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.MutuallyExclusiveBinaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.NotEqualBinaryConstraint;
+import edu.wpi.cs.cs4341.project2.constraints.WeightConstraint;
 
 public class Project2 {
 	public static void main(String[] args) {
@@ -56,7 +57,9 @@ public class Project2 {
 						bags = (Bag[]) bagsList.toArray();
 						bagsList = null;
 						
-						// TODO WeightConstraints
+						for (int i = 0; i < bags.length; i++) {
+							constraintList.add(new WeightConstraint(bags[i], items));
+						}
 					}
 				}
 				
