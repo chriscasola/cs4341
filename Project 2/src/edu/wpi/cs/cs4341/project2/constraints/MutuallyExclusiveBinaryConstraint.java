@@ -4,7 +4,7 @@ import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
 
 /**
- * Represents a mutually exclusive binary constraint. in which two given items cannot be simultaneously assigned to a given pair of bags.
+ * Represents a mutually exclusive binary constraint, in which two given items cannot be simultaneously assigned to a given pair of bags.
  */
 public class MutuallyExclusiveBinaryConstraint extends BinaryConstraint {
 	protected Bag[] bags;

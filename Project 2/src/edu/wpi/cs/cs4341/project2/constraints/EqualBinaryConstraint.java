@@ -3,7 +3,7 @@ package edu.wpi.cs.cs4341.project2.constraints;
 import edu.wpi.cs.cs4341.project2.Item;
 
 /**
- * Represents an equal binary constraint. This constraint requires that two specific Items are not assigned to the same Bag.
+ * Represents an equal binary constraint. This constraint requires that two specific Items are assigned to the same Bag.
  */
 public class EqualBinaryConstraint extends BinaryConstraint {
 	/**
