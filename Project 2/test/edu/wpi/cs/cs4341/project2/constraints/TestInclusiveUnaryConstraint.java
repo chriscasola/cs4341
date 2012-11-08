@@ -21,10 +21,15 @@ public class TestInclusiveUnaryConstraint {
 
 	@Before
 	public void setUp() throws Exception {
-		bag1 = new Bag('a', 10);
-		bag2 = new Bag('b', 10);
-		bag3 = new Bag('c', 10);
-		bag4 = new Bag('d', 10);
+		bags = new Bag[4];
+		bags[0] = new Bag('a', 10);
+		bags[1] = new Bag('b', 10);
+		bags[2] = new Bag('c', 10);
+		bags[3] = new Bag('d', 10);
+		bag1 = bags[0];
+		bag2 = bags[1];
+		bag3 = bags[2];
+		bag4 = bags[3];
 		item1 = new Item('A', 3);
 	}
 
@@ -41,4 +46,61 @@ public class TestInclusiveUnaryConstraint {
 		assertTrue(iuc1.satisfied() == Satisfaction.BROKEN);
 	}
 
+	@Test
+	public void testFromString() {
+		Item[] items = new Item[2];
+		items[0] = item1;
+		items[1] = new Item('Z', 10);
+
+		InclusiveUnaryConstraint constraint = InclusiveUnaryConstraint.fromString("A a b", items, bags);
+
+		assertTrue(items[0].equals(constraint.item));
+		assertTrue(bags[0].equals(constraint.bags[0]));
+		assertTrue(bags[1].equals(constraint.bags[1]));
+
+		// test for incorrect parameter quantity Exceptions
+		try {
+			constraint = InclusiveUnaryConstraint.fromString("A", items, bags);
+			fail("No exception thrown.");
+		}
+		catch (RuntimeException e) {
+			assertTrue(e.getMessage().equals("The given String must contain at least two parameters."));
+		}
+
+		// test for first parameter too long Exception
+		try {
+			constraint = InclusiveUnaryConstraint.fromString("AA a", items, bags);
+			fail("No exception thrown.");
+		}
+		catch (RuntimeException e) {
+			assertTrue(e.getMessage().equals("The first parameter contained in the given String must be exactly one character long."));
+		}
+
+		// test for post first parameter too long Exception
+		try {
+			constraint = InclusiveUnaryConstraint.fromString("A aa", items, bags);
+			fail("No exception thrown.");
+		}
+		catch (RuntimeException e) {
+			assertTrue(e.getMessage().equals("Parameter 2 contained in the given String must be only one character long."));
+		}
+
+		// test for no corresponding Bag found Exception
+		try {
+			constraint = InclusiveUnaryConstraint.fromString("A z", items, bags);
+			fail("No exception thrown.");
+		}
+		catch (RuntimeException e) {
+			assertTrue(e.getMessage().equals("No corresponding Bag found for parameter 2."));
+		}
+
+		// test for no corresponding Item found Exception
+		try {
+			constraint = InclusiveUnaryConstraint.fromString("X a", items, bags);
+			fail("No exception thrown.");
+		}
+		catch (RuntimeException e) {
+			assertTrue(e.getMessage().equals("No corresponding Item found for first parameter."));
+		}
+	}
 }
