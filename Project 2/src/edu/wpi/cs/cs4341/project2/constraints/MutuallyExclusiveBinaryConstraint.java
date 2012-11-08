@@ -66,6 +66,16 @@ public class MutuallyExclusiveBinaryConstraint extends BinaryConstraint {
 		return Satisfaction.NONE;
 	}
 	
+	@Override
+	public boolean hasBag(Bag bag) {
+		for (int i = 0; i < bags.length; i++) {
+			if (bag.equals(bags[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Returns a new MutuallyExclusiveBinaryConstraint created from the given String.
 	 * 
