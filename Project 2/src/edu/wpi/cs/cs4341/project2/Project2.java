@@ -12,6 +12,9 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.EqualBinaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.ExclusiveUnaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.InclusiveUnaryConstraint;
+import edu.wpi.cs.cs4341.project2.constraints.MutuallyExclusiveBinaryConstraint;
+import edu.wpi.cs.cs4341.project2.constraints.NotEqualBinaryConstraint;
+import edu.wpi.cs.cs4341.project2.constraints.WeightConstraint;
 
 public class Project2 {
 	public static void main(String[] args) {
@@ -37,23 +40,26 @@ public class Project2 {
 		ArrayList<Constraint> constraintList = new ArrayList<Constraint>();
 		Item[] items = null;
 		Bag[] bags = null;
-		Constraint[] constraints;
+		Constraint[] constraints = null;
 		
 		try {
 			while ((line = reader.readLine()) != null) {
 				if (line.substring(0, 5).equals("#####")) {
 					section++;
 					
-					if (section == 1) {
+					// After processing variables (Items) section, get items array.
+					if (section == 2) {
 						items = (Item[]) itemsList.toArray();
 						itemsList = null;
 					}
-					else if (section == 2) {
+					// After processing values (Bags) section, get bags array and build WeightConstraints.
+					else if (section == 3) {
 						bags = (Bag[]) bagsList.toArray();
 						bagsList = null;
-					}
-					else if (section == 3) {
-						// TODO WeightConstraints
+						
+						for (int i = 0; i < bags.length; i++) {
+							constraintList.add(new WeightConstraint(bags[i], items));
+						}
 					}
 				}
 				
@@ -79,10 +85,10 @@ public class Project2 {
 					case 6:	constraintList.add(EqualBinaryConstraint.fromString(line, items));
 							break;
 					// binary not equals
-					case 7:	// TODO
+					case 7:	constraintList.add(NotEqualBinaryConstraint.fromString(line, items));
 							break;
 					// mutual exclusive
-					case 8:	// TODO
+					case 8:	constraintList.add(MutuallyExclusiveBinaryConstraint.fromString(line, items, bags));
 							break;
 				}
 			}

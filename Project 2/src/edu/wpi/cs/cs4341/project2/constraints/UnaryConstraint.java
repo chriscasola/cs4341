@@ -39,7 +39,7 @@ public abstract class UnaryConstraint implements Constraint {
 	
 	@Override
 	public boolean hasItem(Item item) {
-		if (this.item == item) {
+		if (this.item.equals(item)) {
 			return true;
 		}
 		return false;
@@ -48,7 +48,7 @@ public abstract class UnaryConstraint implements Constraint {
 	@Override
 	public boolean hasBag(Bag bag) {
 		for (int i = 0; i < bags.length; i++) {
-			if (bags[i] == bag) {
+			if (bags[i].equals(bag)) {
 				return true;
 			}
 		}

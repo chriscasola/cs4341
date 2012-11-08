@@ -67,7 +67,7 @@ public class WeightConstraint implements Constraint {
 	@Override
 	public boolean hasItem(Item item) {
 		for (int i = 0; i < items.length; i++) {
-			if (items[i] == item) {
+			if (items[i].equals(item)) {
 				return true;
 			}
 		}
@@ -76,7 +76,7 @@ public class WeightConstraint implements Constraint {
 
 	@Override
 	public boolean hasBag(Bag bag) {
-		if (this.bag == bag) {
+		if (this.bag.equals(bag)) {
 			return true;
 		}
 		return false;
