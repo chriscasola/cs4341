@@ -47,7 +47,7 @@ public class EqualBinaryConstraint extends BinaryConstraint {
 
 		// Ensure there are only two parameters in the String
 		if (parameters.length != 2) {
-			throw new RuntimeException("The given String must only contain two parameters.");
+			throw new RuntimeException("The given String must contain exactly two parameters.");
 		}
 		// Ensure the first parameter is exactly 1 character long
 		else if (parameters[0].length() != 1) {
