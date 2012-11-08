@@ -1,5 +1,6 @@
 package edu.wpi.cs.cs4341.project2.constraints;
 
+import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
 
 /**
@@ -23,4 +24,11 @@ public interface Constraint {
 	 * @return true if the item is involved in this constraint, otherwise false
 	 */
 	public boolean hasItem(Item item);
+	
+	/**
+	 * Returns true if the bag is involved in this constraint, otherwise false
+	 * @param bag the bag to check
+	 * @return true if the bag is involved in this constraint, otherwise false
+	 */
+	public boolean hasBag(Bag bag);
 }

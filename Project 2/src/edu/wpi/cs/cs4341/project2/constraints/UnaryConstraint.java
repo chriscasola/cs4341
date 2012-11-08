@@ -36,4 +36,22 @@ public abstract class UnaryConstraint implements Constraint {
 		this.item = item;
 		this.bags = bags;
 	}
+	
+	@Override
+	public boolean hasItem(Item item) {
+		if (this.item == item) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean hasBag(Bag bag) {
+		for (int i = 0; i < bags.length; i++) {
+			if (bags[i] == bag) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -1,5 +1,6 @@
 package edu.wpi.cs.cs4341.project2.constraints;
 
+import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.Item;
 
 /**
@@ -25,5 +26,18 @@ public abstract class BinaryConstraint implements Constraint {
 		
 		this.item1 = item1;
 		this.item2 = item2;
+	}
+	
+	@Override
+	public boolean hasItem(Item item) {
+		if (item1 == item || item2 == item) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean hasBag(Bag bag) {
+		return false;
 	}
 }

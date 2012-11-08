@@ -30,6 +30,10 @@ public class BacktrackSearch {
 		this.bags = bags;
 		this.constraints = constraints;
 		this.headNode = new Node(null, null, null);
+		
+		if (items == null || bags == null || constraints == null || items.size() < 1 || bags.size() < 1) {
+			throw new RuntimeException("Invalid arguments to the BacktrackSearch constructor!");
+		}
 
 		// Create a copy of the items List
 		for (Item item : items) {
@@ -41,14 +45,8 @@ public class BacktrackSearch {
 	 * Runs the backtrack search
 	 * @return true if a solution is found, false otherwise
 	 */
-	public boolean run() {		
-		if (BackTrack(headNode)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
+	public boolean run() {
+		return BackTrack(headNode) ? true : false;
 	}
 
 	/**
@@ -66,6 +64,7 @@ public class BacktrackSearch {
 			}
 		}
 		Item currItem = selectUnassignedItem();
+		orderBags(); // sort the bags using some algorithm
 		for (Bag bag : bags) {
 			Node currNode = new Node(bag, currItem, startNode);
 			startNode.addChild(currNode);
@@ -113,5 +112,14 @@ public class BacktrackSearch {
 	 */
 	protected Item selectUnassignedItem() {
 		return items.remove(0);
+	}
+	
+	/**
+	 * Orders the bags based on a heuristic (except they are not ordered
+	 * for the basic backtrack search, children of this class should implement
+	 * a better algorithm).
+	 */
+	protected void orderBags() {
+		// do nothing for basic backtrack search
 	}
 }

@@ -64,4 +64,21 @@ public class WeightConstraint implements Constraint {
 		}
 	}
 
+	@Override
+	public boolean hasItem(Item item) {
+		for (int i = 0; i < items.length; i++) {
+			if (items[i] == item) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean hasBag(Bag bag) {
+		if (this.bag == bag) {
+			return true;
+		}
+		return false;
+	}
 }
