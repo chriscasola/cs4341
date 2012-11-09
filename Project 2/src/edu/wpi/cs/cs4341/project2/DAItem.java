@@ -11,15 +11,44 @@ public class DAItem extends Item {
 
 	protected List<Bag> domain;
 	
-	public DAItem(char id, int weight, List<Bag> bags) {
+	public DAItem(char id, int weight) {
 		super(id, weight);
+	}
+
+	public List<Bag> getDomain() {
+		return domain;
+	}
+	
+	public void setDomain(List<Bag> bags) {
 		domain = new ArrayList<Bag>();
 		for (Bag bag : bags) {
 			domain.add(bag);
 		}
 	}
-
-	public List<Bag> getDomain() {
-		return domain;
+	
+	/**
+	 * Returns a new Item created from the given String.
+	 * 
+	 * @param itemString	The String to build an Item from.
+	 * 
+	 * @return	An Item created using the given String.
+	 */
+	public static DAItem fromString(String itemString) {
+		String[] parameters = itemString.split(" ");
+		
+		// Ensure there are only two parameters in the String
+		if (parameters.length != 2) {
+			throw new RuntimeException("The given String must only contain two parameters.");
+		}
+		// Ensure the first parameter is 1 character long
+		else if (parameters[0].length() != 1) {
+			throw new RuntimeException("The first parameter contained in the given String must only be one character long.");
+		}
+		else {
+			char id = parameters[0].charAt(0);
+			int weight = Integer.parseInt(parameters[1]);
+			
+			return new DAItem(id, weight);
+		}
 	}
 }

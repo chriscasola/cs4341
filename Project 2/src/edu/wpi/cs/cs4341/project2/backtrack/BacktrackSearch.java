@@ -25,7 +25,7 @@ public class BacktrackSearch {
 	/**
 	 * Constructs a new BacktrackSearch
 	 */
-	public BacktrackSearch(List<Item> items, List<Bag> bags, List<Constraint> constraints) {
+	public BacktrackSearch(List<? extends Item> items, List<Bag> bags, List<Constraint> constraints) {
 		this.items = new ArrayList<Item>();
 		this.bags = bags;
 		this.constraints = constraints;

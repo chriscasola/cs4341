@@ -3,7 +3,6 @@ package edu.wpi.cs.cs4341.project2.constraintgraph;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -11,7 +10,6 @@ import org.junit.Test;
 
 import edu.wpi.cs.cs4341.project2.Bag;
 import edu.wpi.cs.cs4341.project2.DAItem;
-import edu.wpi.cs.cs4341.project2.Item;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.EqualBinaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.NotEqualBinaryConstraint;
@@ -36,10 +34,14 @@ public class TestCGNode {
 		List<Bag> bags = new ArrayList<Bag>();
 		bags.add(bag1);
 		bags.add(bag2);
-		item1 = new DAItem('A', 5, bags);
-		item2 = new DAItem('B', 2, bags);
-		item3 = new DAItem('C', 4, bags);
-		item4 = new DAItem('D', 7, bags);
+		item1 = new DAItem('A', 5);
+		item1.setDomain(bags);
+		item2 = new DAItem('B', 2);
+		item2.setDomain(bags);
+		item3 = new DAItem('C', 4);
+		item3.setDomain(bags);
+		item4 = new DAItem('D', 7);
+		item4.setDomain(bags);
 		
 		constraints = new Constraint[4];
 		constraints[0] = new EqualBinaryConstraint(item1, item2);

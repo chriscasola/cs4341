@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
+import edu.wpi.cs.cs4341.project2.backtrack.BacktrackSearch;
+import edu.wpi.cs.cs4341.project2.backtrack.BacktrackSearchHeuristic;
+import edu.wpi.cs.cs4341.project2.constraintgraph.Graph;
 import edu.wpi.cs.cs4341.project2.constraints.CapacityConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.EqualBinaryConstraint;
@@ -35,10 +38,10 @@ public class Project2 {
 		String line;
 		int section = 0;
 		
-		ArrayList<Item> itemsList = new ArrayList<Item>();
+		ArrayList<DAItem> itemsList = new ArrayList<DAItem>();
 		ArrayList<Bag> bagsList = new ArrayList<Bag>();
 		ArrayList<Constraint> constraintList = new ArrayList<Constraint>();
-		Item[] items = null;
+		DAItem[] items = null;
 		Bag[] bags = null;
 		Constraint[] constraints = null;
 		
@@ -49,9 +52,8 @@ public class Project2 {
 					
 					// After processing variables (Items) section, get items array.
 					if (section == 2) {
-						items = new Item[itemsList.size()];
+						items = new DAItem[itemsList.size()];
 						itemsList.toArray(items);
-						itemsList = null;
 					}
 					// After processing values (Bags) section, get bags array and build WeightConstraints.
 					else if (section == 3) {
@@ -69,7 +71,7 @@ public class Project2 {
 				
 				switch (section) {
 					// variables
-					case 1:	itemsList.add(Item.fromString(line));
+					case 1:	itemsList.add(DAItem.fromString(line));
 							break;
 					// values
 					case 2:	bagsList.add(Bag.fromString(line));
@@ -96,6 +98,7 @@ public class Project2 {
 							break;
 				}
 			}
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -103,6 +106,28 @@ public class Project2 {
 		
 		constraints = new Constraint[constraintList.size()];
 		constraintList.toArray(constraints);
-		constraintList = null;
+		
+		for (DAItem item : itemsList) {
+			item.setDomain(bagsList);
+		}
+		
+		Graph graph = new Graph(items, bagsList, constraints);
+		graph.AC3();
+		
+		BacktrackSearch search = new BacktrackSearchHeuristic(itemsList, bagsList, constraintList);
+		if (search.run()) {
+			System.out.println("Problem solved!");
+			printBagAssignments(itemsList);
+		}
+		else {
+			System.out.println("Problem could not be solved!");
+		}
+		System.out.flush();
+	}
+	
+	public static void printBagAssignments(List<? extends Item> itemsList) {
+		for (Item item : itemsList) {
+			System.out.println(item.getId() + " " + item.getAssignedBag().getId());
+		}
 	}
 }

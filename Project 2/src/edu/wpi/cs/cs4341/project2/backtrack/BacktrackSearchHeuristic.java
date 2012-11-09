@@ -18,7 +18,7 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
  */
 public class BacktrackSearchHeuristic extends BacktrackSearch {
 
-	public BacktrackSearchHeuristic(List<Item> items, List<Bag> bags, List<Constraint> constraints) {
+	public BacktrackSearchHeuristic(List<? extends Item> items, List<Bag> bags, List<Constraint> constraints) {
 		super(items, bags, constraints);
 	}
 	

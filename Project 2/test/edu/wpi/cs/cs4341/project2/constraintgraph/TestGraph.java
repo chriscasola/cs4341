@@ -36,10 +36,12 @@ public class TestGraph {
 		bags.add(new Bag('b', 20));
 		bags.add(new Bag('c', 20));
 		items = new DAItem[2];
-		items[1] = new DAItem('B', 10, bags);
+		items[1] = new DAItem('B', 10);
+		items[1].setDomain(bags);
 		Bag bagD = new Bag('d', 20); 
 		bags.add(bagD);
-		items[0] = new DAItem('A', 5, bags);
+		items[0] = new DAItem('A', 5);
+		items[0].setDomain(bags);
 		constraint = new EqualBinaryConstraint(items[0], items[1]);
 		
 		graph = new Graph(items, bags, new Constraint[]{constraint});
