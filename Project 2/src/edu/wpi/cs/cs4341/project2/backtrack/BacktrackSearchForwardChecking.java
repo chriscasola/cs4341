@@ -32,7 +32,7 @@ public class BacktrackSearchForwardChecking extends BacktrackSearchHeuristic {
 			}
 		}
 		Item currItem = selectUnassignedItem();
-		orderBags(); // sort the bags using some algorithm
+		orderBags(currItem); // sort the bags using some algorithm
 		for (Bag bag : bags) {
 			Node currNode = new Node(bag, currItem, startNode);
 			startNode.addChild(currNode);

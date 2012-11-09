@@ -118,7 +118,7 @@ public class Project2 {
 		for (DAItem item : itemsList) {
 			item.setDomain(bagsList);
 		}
-		
+		long startTime = System.currentTimeMillis();
 		graph = new Graph(items, bagsList, constraints);
 		graph.AC3();
 		
@@ -130,6 +130,7 @@ public class Project2 {
 		else {
 			System.out.println("Problem could not be solved!");
 		}
+		System.out.println("Elapsed time: " + (System.currentTimeMillis() - startTime));
 		System.out.flush();
 	}
 	
