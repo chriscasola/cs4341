@@ -12,7 +12,7 @@ import edu.wpi.cs.cs4341.project2.constraints.WeightConstraint;
 
 
 public class TestWeightConstraint {
-	
+
 	protected WeightConstraint weightConstraint;
 	protected Item[] items;
 	protected Bag bag;
@@ -21,47 +21,86 @@ public class TestWeightConstraint {
 	public void setUp() throws Exception {
 		bag = new Bag('a', 10);
 		items = new Item[5];
+		// Create items and add them to the item array
+		items[0] = new Item('D', 2);
+		items[1] = new Item('E', 6);
+		items[2] = new Item('G', 1);
+		items[3] = new Item('F', 1);
+		items[4] = new Item('H', 1);
+	}
+
+	@Test
+	public void testConstructorExceptions() {
+		try {
+			WeightConstraint constraint = new WeightConstraint(null, items);
+			fail("Exception not thrown.");
+		}
+		catch (NullPointerException e) {
+			e.getMessage().equals("The parameter bag must not be null.");
+		}
+
+		try {
+			WeightConstraint constraint = new WeightConstraint(bag, null);
+			fail("Exception not thrown.");
+		}
+		catch (NullPointerException e) {
+			e.getMessage().equals("The parameter items must not be null.");
+		}
+
+		try {
+			WeightConstraint constraint = new WeightConstraint(bag, new Item[] {null});
+			fail("Exception not thrown.");
+		}
+		catch (NullPointerException e) {
+			e.getMessage().equals("The parameter items is null at index 0.");
+		}
+	}
+
+	@Test
+	public void testHasBag() {
+		WeightConstraint constraint = new WeightConstraint(bag, items);
+
+		assertTrue(constraint.hasBag(bag));
+		assertFalse(constraint.hasBag(new Bag('a', 80)));
+	}
+	
+	@Test
+	public void testHasItem() {
+		WeightConstraint constraint = new WeightConstraint(bag, items);
+
+		assertTrue(constraint.hasItem(items[0]));
+		assertTrue(constraint.hasItem(items[1]));
+		assertTrue(constraint.hasItem(items[2]));
+		assertTrue(constraint.hasItem(items[3]));
+		assertTrue(constraint.hasItem(items[4]));
+		assertFalse(constraint.hasItem(new Item('A', 10)));
 	}
 
 	@Test
 	public void test() {
-		
-		// Create items and add them to the item array
-		Item item1 = new Item('D', 2);
-		Item item2 = new Item('E', 6);
-		Item item3 = new Item('G', 1);
-		Item item4 = new Item('F', 1);
-		Item item5 = new Item('H', 1);
-		items[0] = item1;
-		items[1] = item2;
-		items[2] = item3;
-		items[3] = item4;
-		items[4] = item5;
-		
-
 		weightConstraint = new WeightConstraint(bag, items);
-		
+
 		// Ensure the constaint is none (there are not items in the bag)
 		assertTrue(weightConstraint.satisfied() == Satisfaction.NONE);
-		
+
 		// Add an item
-		item1.setAssignedBag(bag);
+		items[0].setAssignedBag(bag);
 		assertTrue(weightConstraint.satisfied() == Satisfaction.PARTIAL);
-		
+
 		// Add another item
-		item2.setAssignedBag(bag);
+		items[1].setAssignedBag(bag);
 		assertTrue(weightConstraint.satisfied() == Satisfaction.PARTIAL);
-		
+
 		// Add another item
-		item3.setAssignedBag(bag);
+		items[2].setAssignedBag(bag);
 		assertTrue(weightConstraint.satisfied() == Satisfaction.COMPLETE);
-		
+
 		// Add another item
-		item4.setAssignedBag(bag);
+		items[3].setAssignedBag(bag);
 		assertTrue(weightConstraint.satisfied() == Satisfaction.COMPLETE);
-		
+
 		// Add another item
-		item5.setAssignedBag(bag);
+		items[4].setAssignedBag(bag);
 		assertTrue(weightConstraint.satisfied() == Satisfaction.BROKEN);
 	}
 
