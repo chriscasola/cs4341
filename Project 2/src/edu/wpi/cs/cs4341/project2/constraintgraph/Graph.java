@@ -70,7 +70,7 @@ public class Graph {
 		return true;
 	}
 	
-	protected List<BinaryConstraint> getOutgoingConstraints(DAItem item) {
+	public List<BinaryConstraint> getOutgoingConstraints(DAItem item) {
 		List<BinaryConstraint> retVal = new ArrayList<BinaryConstraint>();
 		for (Constraint constraint : constraints) {
 			if (constraint instanceof BinaryConstraint) {

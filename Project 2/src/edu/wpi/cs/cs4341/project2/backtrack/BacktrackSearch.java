@@ -64,7 +64,7 @@ public class BacktrackSearch {
 			}
 		}
 		Item currItem = selectUnassignedItem();
-		orderBags(); // sort the bags using some algorithm
+		orderBags(currItem); // sort the bags using some algorithm
 		for (Bag bag : bags) {
 			Node currNode = new Node(bag, currItem, startNode);
 			startNode.addChild(currNode);
@@ -119,7 +119,7 @@ public class BacktrackSearch {
 	 * for the basic backtrack search, children of this class should implement
 	 * a better algorithm).
 	 */
-	protected void orderBags() {
+	protected void orderBags(Item currItem) {
 		// do nothing for basic backtrack search
 	}
 }

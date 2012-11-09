@@ -2,7 +2,6 @@ package edu.wpi.cs.cs4341.project2.backtrack;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,14 +22,8 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 	}
 	
 	@Override
-	protected void orderBags() {
-		Collections.sort(items, new Comparator<Item>() {
-			@Override
-			public int compare(Item o1, Item o2) {
-				// TODO implement this comparator to sort bags by order of least constraining value
-				return 0;
-			}
-		});
+	protected void orderBags(Item currItem) {
+		Collections.sort(bags, new BagComparator(currItem));
 	}
 	
 	
