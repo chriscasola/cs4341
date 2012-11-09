@@ -4,6 +4,7 @@ CS4341 Project 2 Readme
 Due 11/8/2012 at 11:59 PM
 
 ## Table of Contents ##
+
 1. Running the Program
 2. Approach
 3. Testing
@@ -11,6 +12,7 @@ Due 11/8/2012 at 11:59 PM
 5. Error in constraint09.dat solution
 
 ## Running the Program ##
+
 To run the program from Eclipse, right click Project2.java, choose "Run As" > "Run Configurations". In the 
 window that pops up, click the Arguments tab and then type the name of the dat file to open under Program 
 Arguments.
@@ -19,9 +21,12 @@ Arguments.
 
 
 ## Testing ##
+
 The following chart shows the times for our backtracking (BT), backtracking with arc consistency (BT & AC), 
 heuristic backtracking (BT & Heur.), heuristic backtracking with arc consistency (BT & Heur. & AC), and 
-backtracking with forward checking (FC).
+backtracking with forward checking (FC) methods. For each Problem and Method, we performed 15 trials and 
+averaged the resulting times to create the chart. We chose to do problems 3 through 6 because we could check 
+our answers relatively quickly by hand.
 
 	+----------------------------------------------------------------------+
 	| Problem  | BT     | BT & AC | BT & Heur. | BT & Heur. & AC | FC      |
@@ -39,9 +44,10 @@ backtracking with forward checking (FC).
 
 ## Error in constraint09.dat solution ##
 
-The provided solution to constraint09.dat is incorrect. We will show this by providing two tables below. The 
-first table shows the total weights for the items in each bag. This table shows that all bags are at least 
-90% full (by weight) and that the items contained do not exceed the maximum weight.
+The provided solution (constraint09_solution.txt) to constraint09.dat is incorrect. We will show this by 
+providing two tables below. The first table shows the total weights for the items in each bag. This table 
+shows that all bags are at least 90% full (by weight) and that the items contained do not exceed the maximum 
+weight.
 
 	 p (max: 32) | q (max: 25) | r (max: 20) | x (max: 14)
 	-------------------------------------------------------
