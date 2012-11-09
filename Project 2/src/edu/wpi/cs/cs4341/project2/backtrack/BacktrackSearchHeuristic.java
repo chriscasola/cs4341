@@ -22,7 +22,7 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 	}
 	
 	/**
-	 * Uses the least remaining values algorithm to order the list
+	 * Uses the least constraining values algorithm to order the list
 	 * of bags.
 	 */
 	@Override

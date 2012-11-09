@@ -11,12 +11,33 @@ Due 11/8/2012 at 11:59 PM
 5. Error in constraint09.dat solution
 
 ## Running the Program ##
-To run the program from Eclipse, right click Project2.java, choose "Run As" > "Run Configurations". In the 
-window that pops up, click the Arguments tab and then type the name of the dat file to open under Program 
+To run the program from Eclipse, right click Project2.java, choose "Run As" > "Run Configurations". In the
+window that pops up, click the Arguments tab and then type the name of the dat file to open under Program
 Arguments.
 
 ## Approach ##
+To implement the solver for CSPs, we started with the basic backtracking search algorithm with no heuristics.
+The pseudo-code for our implementation is here:
+	function BackTrack(csp)
+		if all items are assigned and constraints are met, return true
+		select an unassigned item
+		for each bag in the domain of item
+			construct a tree node for the item and add it to the tree
+			assign the item to the bag
+			remove the item from the list of unassigned items
+			verify constraints
+				if broken, revert the assignment and backtrack
+				else recursively call backtrack on the current node (DFS)
 
+After implementing the BacktrackSearch class, we realized it would be simply to extend the BacktrackSearch
+class and simply override the selectUnassignedItem() and orderBags() methods to add heuristics to the search,
+namely least constraining values and minimum remaining values. orderBags() implements least constraining value
+by simply using Java's built in merge sort to sort the list using a comparator that calculates the least
+constraining bag. selectUnassignedItem() implements minimum remaining value.
+
+Next, we implemented the AC3() method in the Graph class which applies the arc consistency algorithm.
+
+Finally, we extended the BacktrackSearchHeuristic class and added forward checking to the Backtrack algorithm. 
 
 ## Testing ##
 The following chart shows the times for our backtracking (BT), backtracking with arc consistency (BT & AC), 
