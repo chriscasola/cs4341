@@ -2,6 +2,7 @@ package edu.wpi.cs.cs4341.project2.constraints;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 	public void testConstructorExceptions() {
 		try {
 			MutuallyExclusiveBinaryConstraint constraint = new MutuallyExclusiveBinaryConstraint(item1, item2, null, bags[1]);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The parameter bag1 must not be null."));
@@ -41,6 +43,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		
 		try {
 			MutuallyExclusiveBinaryConstraint constraint = new MutuallyExclusiveBinaryConstraint(item1, item2, bags[0], null);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The parameter bag2 must not be null."));
@@ -104,6 +107,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		// test for less than four parameters exception
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A B a", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The given String must contain at least four parameters."));
@@ -112,6 +116,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		// test for parameter length exceptions
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("AA B a b", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The first parameter contained in the given String must be exactly one character long."));
@@ -119,6 +124,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A BB a b", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The second parameter contained in the given String must be exactly one character long."));
@@ -126,6 +132,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A B aa b", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The third parameter contained in the given String must be exactly one character long."));
@@ -133,6 +140,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A B a bb", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("The fourth parameter contained in the given String must be exactly one character long."));
@@ -141,6 +149,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		// test for nonexistent item
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("Z B a b", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("Unable to find an Item with id Z."));
@@ -148,6 +157,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A Z a b", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("Unable to find an Item with id Z."));
@@ -156,6 +166,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		// test for nonexistent bag
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A B z b", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("Unable to find an Item with id z."));
@@ -163,6 +174,7 @@ public class TestMutuallyExclusiveBinaryConstraint {
 		
 		try {
 			constraint = MutuallyExclusiveBinaryConstraint.fromString("A B a z", items, bags);
+			fail("Exception not thrown.");
 		}
 		catch (RuntimeException e) {
 			assertTrue(e.getMessage().equals("Unable to find an Item with id z."));

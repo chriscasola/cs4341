@@ -2,6 +2,7 @@ package edu.wpi.cs.cs4341.project2.constraints;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class TestUnaryConstraint {
 	public void testConstructorExceptions() {
 		try {
 			DummyUnaryConstraint constraint = new DummyUnaryConstraint(null, bags);
+			fail("Exception not thrown.");
 		}
 		catch (NullPointerException e) {
 			assertTrue(e.getMessage().equals("The parameter item must not be null."));
@@ -33,6 +35,7 @@ public class TestUnaryConstraint {
 		
 		try {
 			DummyUnaryConstraint constraint = new DummyUnaryConstraint(item, null);
+			fail("Exception not thrown.");
 		}
 		catch (NullPointerException e) {
 			assertTrue(e.getMessage().equals("The parameter bags must not be null."));
@@ -40,6 +43,7 @@ public class TestUnaryConstraint {
 		
 		try {
 			DummyUnaryConstraint constraint = new DummyUnaryConstraint(item, new Bag[]{null});
+			fail("Exception not thrown.");
 		}
 		catch (NullPointerException e) {
 			assertTrue(e.getMessage().equals("The parameter bags is null at index 0."));
