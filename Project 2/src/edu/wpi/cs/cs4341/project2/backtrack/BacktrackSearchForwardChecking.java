@@ -12,10 +12,8 @@ import edu.wpi.cs.cs4341.project2.constraints.Constraint;
 import edu.wpi.cs.cs4341.project2.constraints.Constraint.Satisfaction;
 
 public class BacktrackSearchForwardChecking extends BacktrackSearchHeuristic {
-	public BacktrackSearchForwardChecking(List<Item> items, List<Bag> bags,
-			List<Constraint> constraints) {
+	public BacktrackSearchForwardChecking(List<? extends Item> items, List<Bag> bags, List<Constraint> constraints) {
 		super(items, bags, constraints);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -48,13 +46,12 @@ public class BacktrackSearchForwardChecking extends BacktrackSearchHeuristic {
 					// for each item in constraint
 					for (int i = 0; i < items.length; i++) {
 						// if the item is not currItem
-						if (!currItem.equals(items[i])) {
+						if (!currItem.equals(items[i]) && items[i].getAssignedBag() == null) {
 							// for each bag in the current constraint item
 							Iterator<Bag> iBags = ((DAItem) items[i]).getDomain().iterator();
 							Bag rBag;
 							while (iBags.hasNext()) {
 								rBag = iBags.next();
-								items[i].setAssignedBag(null);
 								items[i].setAssignedBag(rBag);
 								// remove the bag from the current constraint item's domain if Satisfaction is broken
 								if (constraint.satisfied() == Satisfaction.BROKEN) {
