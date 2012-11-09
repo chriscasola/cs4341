@@ -23,6 +23,8 @@ public class BacktrackSearchForwardChecking extends BacktrackSearchHeuristic {
 	 */
 	@Override
 	protected boolean BackTrack(Node startNode) {
+		// This method is very similar to the one in the simple Backtrack class,
+		// there are more descriptive comments there.
 		if (items.size() == 0) {
 			if (verifyConstraintsComplete()) {
 				return true;

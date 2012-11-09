@@ -31,6 +31,7 @@ public class BacktrackSearch {
 		this.constraints = constraints;
 		this.headNode = new Node(null, null, null);
 		
+		// Make sure all paramters are valid
 		if (items == null || bags == null || constraints == null || items.size() < 1 || bags.size() < 1) {
 			throw new RuntimeException("Invalid arguments to the BacktrackSearch constructor!");
 		}
@@ -55,7 +56,7 @@ public class BacktrackSearch {
 	 * @return true if a solution has been found, false otherwise
 	 */
 	protected boolean BackTrack(Node startNode) {
-		if (items.size() == 0) {
+		if (items.size() == 0) { // All the items have been assigned, verify constraints are met and return true
 			if (verifyConstraintsComplete()) {
 				return true;
 			}
@@ -63,21 +64,25 @@ public class BacktrackSearch {
 				return false;
 			}
 		}
+		
+		// Select an unassigned item (this may or may not use heuristics, heuristics
+		// are used if the child class BacktrackSearchHeuristic is instantiated as the
+		// child class overrides the basic selectUnassignedItem() method.
 		Item currItem = selectUnassignedItem();
-		orderBags(currItem); // sort the bags using some algorithm
+		orderBags(currItem); // sort the bags using some algorithm, same note as above applies
 		for (Bag bag : bags) {
-			Node currNode = new Node(bag, currItem, startNode);
-			startNode.addChild(currNode);
-			currNode.apply();
-			items.remove(currItem);
-			if (verifyConstraints()) {
-				if (BackTrack(currNode)) {
+			Node currNode = new Node(bag, currItem, startNode); // construct a node in the tree representing the assignment
+			startNode.addChild(currNode); // add the new node to the tree
+			currNode.apply(); // do the assignment (put the item in the bag)
+			items.remove(currItem); // remove the item from the list since it has been assigned
+			if (verifyConstraints()) { 
+				if (BackTrack(currNode)) { // constraints are not broken, do not backtrack
 					return true;
 				}
 			}
-			items.add(currNode.revert()); // constraints violated, revert the assignment
+			items.add(currNode.revert()); // constraints violated, revert the assignment and backtrack
 		}
-		return false; // failure
+		return false; // failure, backtrack
 	}
 
 	/**
@@ -108,6 +113,10 @@ public class BacktrackSearch {
 
 	/**
 	 * Returns an item that is not in a bag
+	 * 
+	 * A subclass can override this method so that a better
+	 * algorithm for picking the next item to assign can be used
+	 * 
 	 * @return an item that is not in a bag
 	 */
 	protected Item selectUnassignedItem() {

@@ -21,28 +21,35 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 		super(items, bags, constraints);
 	}
 	
+	/**
+	 * Uses the least remaining values algorithm to order the list
+	 * of bags.
+	 */
 	@Override
 	protected void orderBags(Item currItem) {
 		Collections.sort(bags, new BagComparator(currItem));
 	}
 	
-	
+	/**
+	 * Uses minimum remaining values algorithm to select the next
+	 * bag to assign, breaking ties with the degree heuristic.
+	 */
 	@Override
 	protected Item selectUnassignedItem() {
-		Item bestItem = items.get(0);
-		int bestNumBags = getNumPossibleBags(bestItem);
+		Item bestItem = items.get(0); // start with the first item
+		int bestNumBags = getNumPossibleBags(bestItem); // get size of the item's domain
 		int currNumBags = bestNumBags;
 		
-		for (int i = 1; i < items.size(); i++) {
-			currNumBags = getNumPossibleBags(items.get(i));
-			if (currNumBags == bestNumBags) {
+		for (int i = 1; i < items.size(); i++) { // for each item, compare the size of it's domain with current best
+			currNumBags = getNumPossibleBags(items.get(i)); // get domain of current bag
+			if (currNumBags == bestNumBags) { // tie occurred, break it
 				// use degree heuristic if necessary
-				if (getConstraints(bestItem) < getConstraints(items.get(i))) {
+				if (getConstraints(bestItem) < getConstraints(items.get(i))) { // compares number of constraints involving each item
 					bestNumBags = currNumBags;
 					bestItem = items.get(i);
 				}
 			}
-			else if (currNumBags < bestNumBags) {
+			else if (currNumBags < bestNumBags) { // no tie, we have a new best
 				bestNumBags = currNumBags;
 				bestItem = items.get(i);
 			}
@@ -57,16 +64,16 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 	 */
 	protected int getNumPossibleBags(Item item) {
 		int numBags = 0;
-		for (Bag bag : bags) {
-			item.setAssignedBag(bag);
-			for (Constraint constraint : getConstraints(item, bag)) {
+		for (Bag bag : bags) { // for each bag in item's domain
+			item.setAssignedBag(bag); // temporarily put the item in the bag
+			for (Constraint constraint : getConstraints(item, bag)) { // check if assignment is valid
 				if (constraint.satisfied() == Satisfaction.BROKEN) {
-					numBags--;
+					numBags--; // invalid assignment, subtract
 					break;
 				}
 			}
-			item.setAssignedBag(null);
-			numBags++;
+			item.setAssignedBag(null); // remove item from bag
+			numBags++; // increment num bags (this is counteracted in the loop if the assignment is invalid
 		}
 		return numBags;
 	}
@@ -80,8 +87,8 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 	protected List<Constraint> getConstraints(Item item, Bag bag) {
 		List<Constraint> retVal = new ArrayList<Constraint>();
 		for (Constraint constraint : constraints) {
-			if (constraint.hasItem(item) || constraint.hasBag(bag)) {
-				retVal.add(constraint);
+			if (constraint.hasItem(item) || constraint.hasBag(bag)) { // check if the constraint has the item or bag
+				retVal.add(constraint); // if yes, add it to the return list
 			}
 		}
 		return retVal;
@@ -96,8 +103,8 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 		int numConstraints = 0;
 		
 		for (Constraint constraint : constraints) {
-			if (constraint.hasItem(item)) {
-				numConstraints++;
+			if (constraint.hasItem(item)) { // check if the constraint has the item
+				numConstraints++; // yes, so increment
 			}
 		}
 		return numConstraints;
@@ -111,12 +118,15 @@ public class BacktrackSearchHeuristic extends BacktrackSearch {
 	 * from the given node in the constraint graph.
 	 */
 	protected HashMap<Constraint, Item> getConstGraphNeighbors(Item item) {
+		// contains the "edges" in the constraint graph that are connected
+		// to the given item
 		HashMap<Constraint, Item> retVal = new HashMap<Constraint, Item>();
+		
 		Item[] constItems;
 		for (Constraint constraint : constraints) {
-			if (constraint instanceof BinaryConstraint) {
-				constItems = ((BinaryConstraint) constraint).getItems();
-				if (constItems[0] == item) {
+			if (constraint instanceof BinaryConstraint) { // only concerned with binary constraints
+				constItems = ((BinaryConstraint) constraint).getItems(); // get the items involved in the constraint
+				if (constItems[0] == item) { // add an edge to the map
 					retVal.put(constraint, constItems[1]);
 				}
 				else if (constItems[1] == item) {
