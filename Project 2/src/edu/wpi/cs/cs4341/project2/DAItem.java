@@ -9,16 +9,29 @@ import java.util.List;
  */
 public class DAItem extends Item {
 
+	/** The possible bags this item can be assigned to */
 	protected List<Bag> domain;
 	
+	/**
+	 * Constructs a new DAItem
+	 * @param id the id of this item
+	 * @param weight the weight of this item
+	 */
 	public DAItem(char id, int weight) {
 		super(id, weight);
 	}
 
+	/**
+	 * @return the domain of this item (list of bags it can be assigned to)
+	 */
 	public List<Bag> getDomain() {
 		return domain;
 	}
 	
+	/**
+	 * Sets the domain of this item to the given list of bags
+	 * @param bags the new domain
+	 */
 	public void setDomain(List<Bag> bags) {
 		domain = new ArrayList<Bag>();
 		for (Bag bag : bags) {

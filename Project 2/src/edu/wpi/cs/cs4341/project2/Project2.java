@@ -118,11 +118,20 @@ public class Project2 {
 		for (DAItem item : itemsList) {
 			item.setDomain(bagsList);
 		}
-		long startTime = System.currentTimeMillis();
-		graph = new Graph(items, bagsList, constraints);
-		graph.AC3();
 		
-		BacktrackSearch search = new BacktrackSearchForwardChecking(itemsList, bagsList, constraintList);
+		// log the start time
+		long startTime = System.currentTimeMillis();
+		
+		// construct the constraint graph
+		graph = new Graph(items, bagsList, constraints);
+		
+		// run the arc consistency algorithm on the graph
+		graph.AC3(); // comment out if you don't want to run this
+		
+		// run the backtrack search
+		BacktrackSearch search = new BacktrackSearch(itemsList, bagsList, constraintList);
+		//BacktrackSearch search = new BacktrackSearchHeuristic(itemsList, bagsList, constraintList);
+		//BacktrackSearch search = new BacktrackSearchForwardChecking(itemsList, bagsList, constraintList); // comment out graph.AC3() line above when using this search algorithm
 		if (search.run()) {
 			System.out.println("Problem solved!");
 			printBagAssignments(itemsList);
@@ -130,6 +139,7 @@ public class Project2 {
 		else {
 			System.out.println("Problem could not be solved!");
 		}
+		
 		System.out.println("Elapsed time: " + (System.currentTimeMillis() - startTime));
 		System.out.flush();
 	}
