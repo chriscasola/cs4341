@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.cs.cs4341.project2.backtrack.BacktrackSearch;
+import edu.wpi.cs.cs4341.project2.backtrack.BacktrackSearchForwardChecking;
 import edu.wpi.cs.cs4341.project2.backtrack.BacktrackSearchHeuristic;
 import edu.wpi.cs.cs4341.project2.constraintgraph.Graph;
 import edu.wpi.cs.cs4341.project2.constraints.CapacityConstraint;
@@ -121,7 +122,7 @@ public class Project2 {
 		graph = new Graph(items, bagsList, constraints);
 		graph.AC3();
 		
-		BacktrackSearch search = new BacktrackSearchHeuristic(itemsList, bagsList, constraintList);
+		BacktrackSearch search = new BacktrackSearchForwardChecking(itemsList, bagsList, constraintList);
 		if (search.run()) {
 			System.out.println("Problem solved!");
 			printBagAssignments(itemsList);
