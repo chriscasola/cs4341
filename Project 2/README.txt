@@ -1,3 +1,48 @@
+Christopher Casola
+Jennifer Page
+CS4341 Project 2 Readme
+Due 11/8/2012 at 11:59 PM
+
+The provided solution to constraint09.dat is incorrect. We will show this by providing two tables below. The 
+first table shows the total weights for the items in each bag. This table shows that all bags are at least 
+90% full (by weight) and that the items contained do not exceed the maximum weight.
+
+	 p (max: 32) | q (max: 25) | r (max: 20) | x (max: 14)
+	-------------------------------------------------------
+	     D  3    |      C  6   |      H 12   |      E  5
+	     J 19    |      G 15   |      I  7   |      F  8
+	     L  9    |      K  4   |             |
+	 total: 31   | total: 25   | total: 19   | total: 13
+
+The second table shows each constraint, its value, and whether or not it is broken (and why). As shown in 
+the second table, the second binary mutual exclusive constraint (I H q r) is broken because both I and H are 
+in r. Due to this broken constraint, the provided solution to constraint09.dat is incorrect.
+
+	 Constraint Name         | Value   | Outcome | Why?
+	=========================+=========+=========+===================================================
+	 fit-limit               | 2 3     | pass    | All bags have between 2 (inc.) and 3 (inc.) items
+	-------------------------+---------+---------+---------------------------------------------------
+	 unary inclusive         | C q r   | pass    | C is in q
+	                         | D p q   | pass    | D is in p
+	                         | H q r x | pass    | H is in r
+	                         | K p q   | pass    | K is in q
+	-------------------------+---------+---------+---------------------------------------------------
+	 unary exclusive         | E p q r | pass    | E is in x (not p, q or r)
+	                         | F q     | pass    | F is in x (not q)
+	                         | G p r   | pass    | G is in q (not p or r)
+	                         | I x     | pass    | I is in r (not x)
+	-------------------------+---------+---------+---------------------------------------------------
+	 binary equals           | L J     | pass    | L and J are in p
+	                         | I H     | pass    | I and H are in r
+	-------------------------+---------+---------+---------------------------------------------------
+	 binary not equals       | D K     | pass    | D is in p, K is in q
+	                         | I E     | pass    | I is in r, E is in x
+	                         | H F     | pass    | H is in r, F is in x
+	-------------------------+---------+---------+---------------------------------------------------
+	 binary mutual exclusive | D K p r | pass    | D is in p, K is in q (not p or r)
+	                         | I H q r | fail    | !!! Both I and H are in r !!!
+	                         | L F q x | pass    | L is in p (not q or x), F is in x
+
 +----------------------------------------------------------------------+
 | Problem  | BT     | BT & AC | BT & Heur. | BT & Heur. & AC | FC      |
 +----------------------------------------------------------------------|
