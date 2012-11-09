@@ -20,6 +20,13 @@ import edu.wpi.cs.cs4341.project2.constraints.NotEqualBinaryConstraint;
 import edu.wpi.cs.cs4341.project2.constraints.WeightConstraint;
 
 public class Project2 {
+	
+	public static Graph graph;
+	
+	public static Graph getGraph() {
+		return graph;
+	}
+	
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.out.println("A filename must be specified.");
@@ -111,7 +118,7 @@ public class Project2 {
 			item.setDomain(bagsList);
 		}
 		
-		Graph graph = new Graph(items, bagsList, constraints);
+		graph = new Graph(items, bagsList, constraints);
 		graph.AC3();
 		
 		BacktrackSearch search = new BacktrackSearchHeuristic(itemsList, bagsList, constraintList);
