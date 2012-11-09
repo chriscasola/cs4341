@@ -42,6 +42,15 @@ our answers relatively quickly by hand.
 
 ## Strengths and Weaknesses ##
 
+One of our strengths was our implementation of our Backtracking and Graph classes. These allowed us to 
+extend the classes to modify or extend functionality. This simplified the process of adding heuristics and 
+forward checking. Unfortunately, our code for these classes is still somewhat monolithic and could benefit 
+from being broken into smaller parts to enhance modifiability, code reuse and readability.
+
+Another strength was our robust constraint, Bag, and Item classes. These classes implemented fromString 
+methods that made it easy to parse the text file. Constraint classes have a satisfied method that returns an 
+enum value based on whether the constraint has been unsatisfied, partially satisfied, satisfied, or broken.
+
 ## Error in constraint09.dat solution ##
 
 The provided solution (constraint09_solution.txt) to constraint09.dat is incorrect. We will show this by 
